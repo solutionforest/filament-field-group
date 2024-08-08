@@ -1,0 +1,72 @@
+{
+    "name": "solutionforest/filament-advanced-fields",
+    "description": "test",
+    "keywords": [
+        "solutionforest",
+        "laravel",
+        "filament-advanced-fields"
+    ],
+    "homepage": "https://github.com/solutionforest/filament-advanced-fields",
+    "support": {
+        "issues": "https://github.com/solutionforest/filament-advanced-fields/issues",
+        "source": "https://github.com/solutionforest/filament-advanced-fields"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "alan",
+            "email": "alan@solutionforest.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "filament/filament": "^3.0",
+        "spatie/laravel-package-tools": "^1.15.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^7.9",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.1",
+        "pestphp/pest-plugin-arch": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "spatie/laravel-ray": "^1.26"
+    },
+    "autoload": {
+        "psr-4": {
+            "Solutionforest\\FilamentAdvancedFields\\": "src/",
+            "Solutionforest\\FilamentAdvancedFields\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Solutionforest\\FilamentAdvancedFields\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Solutionforest\\FilamentAdvancedFields\\FilamentAdvancedFieldsServiceProvider"
+            ],
+            "aliases": {
+                "FilamentAdvancedFields": "Solutionforest\\FilamentAdvancedFields\\Facades\\FilamentAdvancedFields"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
