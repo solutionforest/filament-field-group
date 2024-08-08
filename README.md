@@ -1,4 +1,4 @@
-# test
+# Filament Field Group
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/solutionforest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solutionforest/filament-field-group)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/solutionforest/filament-field-group/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/solutionforest/filament-field-group/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -6,8 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/solutionforest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solutionforest/filament-field-group)
 
 
+Filament Field Group is a powerful Laravel package that enhances Filament's form building capabilities. It allows you to easily group and organize form fields, improving the structure and readability of your forms. With this package, you can create collapsible sections, tabs, or custom layouts for your form fields, making complex forms more manageable and user-friendly.
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Installation
 
@@ -40,15 +40,66 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'enabled' => false,
+    // Group by field group
+    'field_types' => [
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text::class,
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\TextArea::class,
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Email::class,
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Password::class,
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Number::class,
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Url::class,
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Select::class,
+    ],
+    'models' => [
+        'field' => \SolutionForest\FilamentFieldGroup\Models\Field::class,
+        'field_group' => SolutionForest\FilamentFieldGroup\Models\FieldGroup::class,
+    ],
+    'table_names' => [
+        'fields' => 'advanced_fields',
+        'field_groups' => 'advanced_field_groups',
+    ],
 ];
 ```
 
 ## Usage
 
+1. Enable the Field Group resource by setting `enabled` to `true` in the config file:
 ```php
-$filamentAdvancedFields = new SolutionForest\FilamentFieldGroup();
-echo $filamentAdvancedFields->echoPhrase('Hello, SolutionForest!');
+
+// config/filament-field-group.php
+return [
+'enabled' => true,
+// ... other config options
+];
 ```
+![Filament Field Group](./docs-assets/images/initial-resource.png)
+
+2. Create field groups and fields, for example:
+
+   - Navigate to the Field Group resource in your Filament admin panel.
+   - Create a new field group (e.g., "User Basic Info").
+   - Add fields to the group (e.g., name, email, etc.).
+![Create Field Group and Field](./docs-assets/images/add-field-1.png)
+![Create Field Group and Field](./docs-assets/images/add-field-2.png)
+![Create Field Group and Field](./docs-assets/images/add-field-3.png)
+
+3. Apply field groups to your form schema:
+```php
+
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
+
+public static function form(Form $form): Form
+{
+    return $form
+        ->columns(1)
+        ->schema([
+            FilamentFieldGroup::findFieldGroup('user_basic'),
+            FilamentFieldGroup::findFieldGroup('user_detail'),
+        ]);
+}
+```
+![Apply Field Group](./docs-assets/images/apply-field-group.png)
 
 ## Testing
 
