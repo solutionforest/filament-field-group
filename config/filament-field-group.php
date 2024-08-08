@@ -3,7 +3,6 @@
 // config for SolutionForest/FilamentFieldGroup
 return [
     'enabled' => false,
-    // Group by field group
     'field_types' => [
         \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text::class,
         \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\TextArea::class,

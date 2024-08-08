@@ -41,7 +41,6 @@ This is the contents of the published config file:
 ```php
 return [
     'enabled' => false,
-    // Group by field group
     'field_types' => [
         \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text::class,
         \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\TextArea::class,
