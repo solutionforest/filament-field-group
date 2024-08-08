@@ -1,6 +1,6 @@
 <?php
 
-namespace Solutionforest\FilamentAdvancedFields\Tests;
+namespace SolutionForest\FilamentFieldGroup\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use Solutionforest\FilamentAdvancedFields\FilamentAdvancedFieldsServiceProvider;
+use SolutionForest\FilamentFieldGroup\FilamentFieldGroupServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -25,7 +25,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Solutionforest\\FilamentAdvancedFields\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'SolutionForest\\FilamentFieldGroup\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -44,7 +44,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            FilamentAdvancedFieldsServiceProvider::class,
+            FilamentFieldGroupServiceProvider::class,
         ];
     }
 

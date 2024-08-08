@@ -1,5 +1,5 @@
 <?php
 
-use Solutionforest\FilamentAdvancedFields\Tests\TestCase;
+use SolutionForest\FilamentFieldGroup\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,13 +1,13 @@
 <?php
 
-namespace Solutionforest\FilamentAdvancedFields\Testing;
+namespace SolutionForest\FilamentFieldGroup\Testing;
 
 use Livewire\Features\SupportTesting\Testable;
 
 /**
  * @mixin Testable
  */
-class TestsFilamentAdvancedFields
+class TestsFilamentFieldGroup
 {
     //
 }

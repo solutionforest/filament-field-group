@@ -1,9 +1,9 @@
 <?php
 
-namespace Solutionforest\FilamentAdvancedFields\Filament\Resources\FieldGroupResource\Pages;
+namespace SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource\Pages;
 
 use Filament\Resources\Pages\EditRecord;
-use Solutionforest\FilamentAdvancedFields\Filament\Resources\FieldGroupResource;
+use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource;
 
 class EditFieldGroup extends EditRecord
 {

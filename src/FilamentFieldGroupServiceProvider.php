@@ -1,6 +1,6 @@
 <?php
 
-namespace Solutionforest\FilamentAdvancedFields;
+namespace SolutionForest\FilamentFieldGroup;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -10,17 +10,17 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
-use Solutionforest\FilamentAdvancedFields\Commands\FilamentAdvancedFieldsCommand;
-use Solutionforest\FilamentAdvancedFields\Testing\TestsFilamentAdvancedFields;
+use SolutionForest\FilamentFieldGroup\Commands\FilamentFieldGroupCommand;
+use SolutionForest\FilamentFieldGroup\Testing\TestsFilamentFieldGroup;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentAdvancedFieldsServiceProvider extends PackageServiceProvider
+class FilamentFieldGroupServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-advanced-fields';
+    public static string $name = 'filament-field-group';
 
-    public static string $viewNamespace = 'filament-advanced-fields';
+    public static string $viewNamespace = 'filament-field-group';
 
     public function configurePackage(Package $package): void
     {
@@ -36,13 +36,13 @@ class FilamentAdvancedFieldsServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('solutionforest/filament-advanced-fields');
+                    ->askToStarRepoOnGitHub('solutionforest/filament-field-group');
             });
 
         $configFileName = $package->shortName();
 
         if (file_exists($package->basePath("/../config/{$configFileName}.php"))) {
-            $package->hasConfigFile();
+            $package->hasConfigFile($configFileName);
         }
 
         if (file_exists($package->basePath('/../database/migrations'))) {
@@ -80,18 +80,18 @@ class FilamentAdvancedFieldsServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filament-advanced-fields/{$file->getFilename()}"),
-                ], 'filament-advanced-fields-stubs');
+                    $file->getRealPath() => base_path("stubs/filament-field-group/{$file->getFilename()}"),
+                ], 'filament-field-group-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsFilamentAdvancedFields);
+        Testable::mixin(new TestsFilamentFieldGroup);
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return 'solutionforest/filament-advanced-fields';
+        return 'solution-forest/filament-field-group';
     }
 
     /**
@@ -100,9 +100,9 @@ class FilamentAdvancedFieldsServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('filament-advanced-fields', __DIR__ . '/../resources/dist/components/filament-advanced-fields.js'),
-            Css::make('filament-advanced-fields-styles', __DIR__ . '/../resources/dist/filament-advanced-fields.css'),
-            Js::make('filament-advanced-fields-scripts', __DIR__ . '/../resources/dist/filament-advanced-fields.js'),
+            // AlpineComponent::make('filament-field-group', __DIR__ . '/../resources/dist/components/filament-field-group.js'),
+            // Css::make('filament-field-group-styles', __DIR__ . '/../resources/dist/filament-field-group.css'),
+            // Js::make('filament-field-group-scripts', __DIR__ . '/../resources/dist/filament-field-group.js'),
         ];
     }
 
@@ -112,7 +112,7 @@ class FilamentAdvancedFieldsServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            FilamentAdvancedFieldsCommand::class,
+            // FilamentFieldGroupCommand::class,
         ];
     }
 
@@ -146,7 +146,7 @@ class FilamentAdvancedFieldsServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_filament-advanced-fields_table',
+            'create_advanced_fields_table',
         ];
     }
 }

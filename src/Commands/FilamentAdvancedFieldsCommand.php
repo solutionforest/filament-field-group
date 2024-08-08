@@ -1,12 +1,12 @@
 <?php
 
-namespace Solutionforest\FilamentAdvancedFields\Commands;
+namespace SolutionForest\FilamentFieldGroup\Commands;
 
 use Illuminate\Console\Command;
 
-class FilamentAdvancedFieldsCommand extends Command
+class FilamentFieldGroupCommand extends Command
 {
-    public $signature = 'filament-advanced-fields';
+    public $signature = 'filament-field-group';
 
     public $description = 'My command';
 

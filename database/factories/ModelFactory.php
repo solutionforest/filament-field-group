@@ -1,6 +1,6 @@
 <?php
 
-namespace Solutionforest\FilamentAdvancedFields\Database\Factories;
+namespace SolutionForest\FilamentFieldGroup\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
