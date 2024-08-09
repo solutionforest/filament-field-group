@@ -1,9 +1,9 @@
 # Filament Field Group
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/solutionforest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solutionforest/filament-field-group)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/solution-forest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solution-forest/filament-field-group)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/solutionforest/filament-field-group/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/solutionforest/filament-field-group/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/solutionforest/filament-field-group/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/solutionforest/filament-field-group/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/solutionforest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solutionforest/filament-field-group)
+[![Total Downloads](https://img.shields.io/packagist/dt/solution-forest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solution-forest/filament-field-group)
 
 
 Filament Field Group is a powerful Laravel package that enhances Filament's form building capabilities. It allows you to easily group and organize form fields, improving the structure and readability of your forms. With this package, you can create collapsible sections, tabs, or custom layouts for your form fields, making complex forms more manageable and user-friendly.
