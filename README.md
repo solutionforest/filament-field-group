@@ -100,6 +100,20 @@ public static function form(Form $form): Form
 ```
 ![Apply Field Group](./docs-assets/images/apply-field-group.png)
 
+## Available Components
+
+Currently, this package provides the following components:
+
+- Text
+- TextArea
+- Email
+- Password
+- Number
+- Url
+- Select
+
+More components can be added in the future. Feel free to submit a pull request if you have ideas for additional components!
+
 ## Testing
 
 ```bash
@@ -113,6 +127,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+
+We welcome contributions to enhance this package. More components can potentially be added, so feel free to submit a pull request with your ideas or improvements.
 
 ## Security Vulnerabilities
 
