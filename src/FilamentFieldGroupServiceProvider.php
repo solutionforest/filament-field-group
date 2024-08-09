@@ -10,7 +10,6 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
-use SolutionForest\FilamentFieldGroup\Commands\FilamentFieldGroupCommand;
 use SolutionForest\FilamentFieldGroup\Testing\TestsFilamentFieldGroup;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -111,9 +110,7 @@ class FilamentFieldGroupServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            // FilamentFieldGroupCommand::class,
-        ];
+        return [];
     }
 
     /**
