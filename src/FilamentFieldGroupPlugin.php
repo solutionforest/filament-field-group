@@ -8,6 +8,9 @@ use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource;
 
 class FilamentFieldGroupPlugin implements Plugin
 {
+    protected ?array $overrideResources = null;
+    protected bool $enablePlugin = false;
+
     public function getId(): string
     {
         return 'filament-field-group';
@@ -16,10 +19,9 @@ class FilamentFieldGroupPlugin implements Plugin
     public function register(Panel $panel): void
     {
         // Register the FieldGroup resource
-        if (config('filament-field-group.enabled', false)) {
-            $panel->resources([
-                FieldGroupResource::class,
-            ]);
+        if (config('filament-field-group.enabled', false) || $this->enablePlugin) {
+            $resources = $this->overrideResources ?? [FieldGroupResource::class];
+            $panel->resources($resources);
         }
     }
 
@@ -38,5 +40,19 @@ class FilamentFieldGroupPlugin implements Plugin
         $plugin = filament(app(static::class)->getId());
 
         return $plugin;
+    }
+
+    public function overrideResources(array $resources): static
+    {
+        $this->overrideResources = $resources;
+
+        return $this;
+    }
+
+    public function enablePlugin(bool $enable = true): static
+    {
+        $this->enablePlugin = $enable;
+
+        return $this;
     }
 }

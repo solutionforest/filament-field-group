@@ -63,18 +63,26 @@ return [
 
 ## Usage
 
-1. Enable the Field Group resource by setting `enabled` to `true` in the config file:
+1. Add `FilamentFieldGroupPlugin` to you panel.
+2. Enable the Field Group resource by setting `enabled` to `true` in the config file:
 ```php
 
 // config/filament-field-group.php
 return [
-'enabled' => true,
-// ... other config options
+    'enabled' => true,
+    // ... other config options
 ];
+```
+Or enable the plugin on `FilamentFieldGroupPlugin`
+```php
+use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
+ 
+$panel
+    ->plugin(FilamentFieldGroupPlugin::make()->enablePlugin());
 ```
 ![Filament Field Group](./docs-assets/images/initial-resource.png)
 
-2. Create field groups and fields, for example:
+3. Create field groups and fields, for example:
 
    - Navigate to the Field Group resource in your Filament admin panel.
    - Create a new field group (e.g., "User Basic Info").
@@ -83,7 +91,7 @@ return [
 ![Create Field Group and Field](./docs-assets/images/add-field-2.png)
 ![Create Field Group and Field](./docs-assets/images/add-field-3.png)
 
-3. Apply field groups to your form schema:
+4. Apply field groups to your form schema:
 ```php
 
 use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
@@ -99,7 +107,7 @@ public static function form(Form $form): Form
 }
 ```
 ![Apply Field Group](./docs-assets/images/apply-field-group.png)
-
+   
 ## Available Components
 
 Currently, this package provides the following components:
@@ -113,6 +121,20 @@ Currently, this package provides the following components:
 - Select
 
 More components can be added in the future. Feel free to submit a pull request if you have ideas for additional components!
+
+
+## Advanced Usage
+### Custom Resources
+You can call `overrideResources` on `FilamentFieldGroupPlugin` to replace original resource:
+```php
+
+use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
+ 
+$panel
+    ->plugin(FilamentFieldGroupPlugin::make()->overrideResources([
+        // your resource
+    ]));
+```
 
 ## Testing
 
