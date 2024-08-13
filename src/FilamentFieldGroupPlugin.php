@@ -9,6 +9,7 @@ use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource;
 class FilamentFieldGroupPlugin implements Plugin
 {
     protected ?array $overrideResources = null;
+
     protected bool $enablePlugin = false;
 
     public function getId(): string
