@@ -3,6 +3,7 @@
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes;
 
 use Attribute;
+
 /**
  * @property string $drive The drive of the database.
  * @property string $type The type of the field in database.

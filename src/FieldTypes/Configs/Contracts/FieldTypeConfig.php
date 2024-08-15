@@ -35,5 +35,5 @@ interface FieldTypeConfig
      *
      * @return array<string,mixed> | array<string,array<string,mixed>>
      */
-    public static function getDbTypeMapping(string $drive = null): array;
+    public static function getDbTypeMapping(?string $drive = null): array;
 }

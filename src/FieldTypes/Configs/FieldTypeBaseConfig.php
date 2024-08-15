@@ -102,7 +102,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     }
 
     /** {@inheritDoc} */
-    public static function getDbTypeMapping(string $drive = null): array
+    public static function getDbTypeMapping(?string $drive = null): array
     {
         $attributes = static::findFieldConfigAttribute(static::class, DbType::class);
 
