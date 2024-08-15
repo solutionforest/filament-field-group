@@ -8,7 +8,6 @@ use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
 use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
 
 class FilamentFieldGroup
