@@ -63,7 +63,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
         return false;
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public static function getFormComponents(): array
     {
         $attributes = static::findFieldConfigAttribute(static::class, FormComponent::class);
@@ -81,7 +81,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
         return $result;
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public static function getConfigNames(): array
     {
         $attributes = static::findFieldConfigAttribute(static::class, ConfigName::class);

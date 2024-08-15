@@ -125,7 +125,6 @@ class FilamentFieldGroup
      * Get the field type config by name.
      *
      * @param  string  $name
-     *
      * @return FieldTypeConfig|null
      */
     public function getFieldTypeConfig($name, array | string $data = [])
