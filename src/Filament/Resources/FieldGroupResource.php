@@ -15,7 +15,7 @@ class FieldGroupResource extends Resource
 {
     protected static ?string $model = FieldGroup::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     public static function form(Form $form): Form
     {

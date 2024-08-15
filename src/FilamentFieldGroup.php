@@ -8,13 +8,14 @@ use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
 use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
 
 class FilamentFieldGroup
 {
     public function getFieldTypeOptions(): array
     {
-        $fieldTypes = config('filament-field-group.field_types');
+        $fieldTypes = FilamentFieldGroupPlugin::get()->getFieldTypeConfigs();
 
         $result = [];
 
@@ -139,7 +140,7 @@ class FilamentFieldGroup
      */
     public function getFieldTypeConfig($name, array | string $data = []): ?FieldTypeConfig
     {
-        $fieldTypes = config('filament-field-group.field_types');
+        $fieldTypes = FilamentFieldGroupPlugin::get()->getFieldTypeConfigs();
 
         foreach ($fieldTypes as $fieldFQCN) {
 

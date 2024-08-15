@@ -11,12 +11,29 @@ Filament Field Group is a powerful Laravel package that enhances Filament's form
 
 ## Installation
 
-You can install the package via composer:
+1. You can install the package via composer:
+    ```bash
+    composer require solution-forest/filament-field-group
+    ```
+2. Register the plugin in your Panel provider
+   ```php
+    use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
 
-```bash
-composer require solution-forest/filament-field-group
-```
+    class AdminPanelProvider extends PanelProvider
+    {
+        public function panel(Panel $panel): Panel
+        {
+            return $panel
+                ->plugin(FilamentFieldGroupPlugin::make());
+        }
+    }
+   ```
+3. Then execute the following commands:
+    ```bash
+    php artisan filament-field-group:install
+    ```
 
+## Publish Config, View, Translation and Migration
 You can publish and run the migrations with:
 
 ```bash
@@ -41,15 +58,6 @@ This is the contents of the published config file:
 ```php
 return [
     'enabled' => false,
-    'field_types' => [
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\TextArea::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Email::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Password::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Number::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Url::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Select::class,
-    ],
     'models' => [
         'field' => \SolutionForest\FilamentFieldGroup\Models\Field::class,
         'field_group' => SolutionForest\FilamentFieldGroup\Models\FieldGroup::class,
@@ -125,15 +133,29 @@ More components can be added in the future. Feel free to submit a pull request i
 
 ## Advanced Usage
 ### Custom Resources
-You can call `overrideResources` on `FilamentFieldGroupPlugin` to replace original resource:
+You can call `resources` on `FilamentFieldGroupPlugin` to add/replace original resource:
 ```php
-
 use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
  
 $panel
-    ->plugin(FilamentFieldGroupPlugin::make()->overrideResources([
-        // your resource
-    ]));
+    ->plugin(FilamentFieldGroupPlugin::make()
+        ->resources([
+            // your resource
+        ], override: true)
+    );
+```
+
+### Custom Field Types
+You can call `fieldTypeConfigs` on `FilamentFieldGroupPlugin` to add/replace original field type config(s):
+```php
+use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
+ 
+$panel
+    ->plugin(FilamentFieldGroupPlugin::make()
+        ->fieldTypeConfigs([
+            // your field type config
+        ], override: true)
+    );
 ```
 
 ## Testing
