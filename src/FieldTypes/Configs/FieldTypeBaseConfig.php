@@ -3,7 +3,10 @@
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
 use Filament\Forms;
+use Illuminate\Support\Arr;
 use ReflectionClass;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
 abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
@@ -60,6 +63,43 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
         return false;
     }
 
+    /** @inheritDoc */
+    public static function getFormComponents(): array
+    {
+        $attributes = static::findFieldConfigAttribute(static::class, FormComponent::class);
+
+        $result = [];
+
+        // Map the attributes to array
+        foreach ($attributes as $attribute) {
+            $attributeInstance = $attribute->newInstance();
+            $result[] = [
+                'component' => $attributeInstance->fqcn,
+            ];
+        }
+
+        return $result;
+    }
+
+    /** @inheritDoc */
+    public static function getConfigNames(): array
+    {
+        $attributes = static::findFieldConfigAttribute(static::class, ConfigName::class);
+
+        $result = [];
+        // Map the attributes to array
+        foreach ($attributes as $attribute) {
+            $attributeInstance = $attribute->newInstance();
+            $result[] = [
+                'name' => $attributeInstance->name,
+                'label' => $attributeInstance->label,
+                'group' => $attributeInstance->group,
+            ];
+        }
+
+        return $result;
+    }
+
     public function __toArray(): array
     {
         return get_object_vars($this);
@@ -71,5 +111,19 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     public function __toString(): string
     {
         return json_encode($this->__toArray());
+    }
+
+    private static function findFieldConfigAttribute($objectOrFQCN, $attributeFQCN, ?\Closure $extraCheck = null)
+    {
+        $reflection = new ReflectionClass($objectOrFQCN);
+
+        $attributes = $reflection->getAttributes();
+
+        return Arr::where($attributes, function ($attribute) use ($attributeFQCN, $extraCheck) {
+            $attributeInstance = $attribute->newInstance();
+
+            return $attribute->getName() === $attributeFQCN &&
+                ($extraCheck ? $extraCheck($attributeInstance) : true);
+        });
     }
 }

@@ -15,4 +15,18 @@ interface FieldTypeConfig
      * Apply the configuration to the component.
      */
     public function applyConfig(Forms\Components\Component $component): void;
+
+    /**
+     * Get the form components for the field type.
+     *
+     * @return array<int,array<string,string>>
+     */
+    public static function getFormComponents(): array;
+
+    /**
+     * Get the configuration names for the field type.
+     *
+     * @return array<int,array<string,string>>
+     */
+    public static function getConfigNames(): array;
 }

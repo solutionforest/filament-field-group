@@ -5,8 +5,6 @@ namespace SolutionForest\FilamentFieldGroup;
 use Filament\Forms;
 use Illuminate\Support\Arr;
 use ReflectionClass;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
 
@@ -20,18 +18,16 @@ class FilamentFieldGroup
 
         foreach ($fieldTypes as $fieldFQCN) {
 
-            $targetAttributes = $this->findFieldConfigAttribute($fieldFQCN, ConfigName::class);
+            $targetAttributes = Arr::first($fieldFQCN::getConfigNames());
 
-            if (count($targetAttributes) === 0) {
+            if (count($targetAttributes) === 0 || ! $targetAttributes) {
                 continue;
             }
 
-            $attributeInstance = $targetAttributes[0]->newInstance();
-
             $result[] = [
-                'name' => $attributeInstance->name,
-                'display' => $attributeInstance->label,
-                'group' => $attributeInstance->group,
+                'name' => $targetAttributes['name'],
+                'display' => $targetAttributes['label'],
+                'group' => $targetAttributes['group'],
             ];
         }
 
@@ -62,13 +58,7 @@ class FilamentFieldGroup
         }
 
         // Get the display value from the attribute of the field type
-        $attributes = $this->findFieldConfigAttribute($fieldTypeConfig, ConfigName::class);
-
-        if (count($attributes) === 0) {
-            return null;
-        }
-
-        return $attributes[0]->newInstance()->label;
+        return data_get(Arr::first($fieldTypeConfig->getConfigNames()), 'label');
     }
 
     /**
@@ -103,19 +93,18 @@ class FilamentFieldGroup
         $schema = [];
 
         foreach ($fieldGroup->fields as $field) {
+
             $fiFormConfig = $this->getFieldTypeConfig($field->type, $field->config);
 
             if (! $fiFormConfig) {
                 continue;
             }
 
-            $fiFormComponentAttribute = Arr::first($this->findFieldConfigAttribute($fiFormConfig, FormComponent::class));
-            if (! $fiFormComponentAttribute) {
+            $fiFormComponentFQCN = Arr::first(Arr::pluck($fiFormConfig->getFormComponents(), 'component'));
+            if (! $fiFormComponentFQCN) {
                 throw new \Exception("The field type config class {$fiFormConfig} does not have a FormComponent attribute.");
             }
 
-            $fiFormComponentAttributeInstance = $fiFormComponentAttribute->newInstance();
-            $fiFormComponentFQCN = $fiFormComponentAttributeInstance->fqcn;
             $fiFormComponent = $fiFormComponentFQCN::make($field->name);
 
             // @todo - some components may not have these methods
@@ -136,15 +125,17 @@ class FilamentFieldGroup
      * Get the field type config by name.
      *
      * @param  string  $name
+     *
+     * @return FieldTypeConfig|null
      */
-    public function getFieldTypeConfig($name, array | string $data = []): ?FieldTypeConfig
+    public function getFieldTypeConfig($name, array | string $data = [])
     {
         $fieldTypes = FilamentFieldGroupPlugin::get()->getFieldTypeConfigs();
 
         foreach ($fieldTypes as $fieldFQCN) {
 
-            $targetAttributes = $this->findFieldConfigAttribute($fieldFQCN, ConfigName::class, function ($attributeInstance) use ($name) {
-                return $attributeInstance->name === $name;
+            $targetAttributes = Arr::where($fieldFQCN::getConfigNames(), function ($attribute) use ($name) {
+                return $attribute['name'] === $name;
             });
 
             if (count($targetAttributes) > 0) {
@@ -180,20 +171,6 @@ class FilamentFieldGroup
         }
 
         return null;
-    }
-
-    private function findFieldConfigAttribute($objectOrFQCN, $attributeFQCN, ?\Closure $extraCheck = null)
-    {
-        $reflection = new ReflectionClass($objectOrFQCN);
-
-        $attributes = $reflection->getAttributes();
-
-        return Arr::where($attributes, function ($attribute) use ($attributeFQCN, $extraCheck) {
-            $attributeInstance = $attribute->newInstance();
-
-            return $attribute->getName() === $attributeFQCN &&
-                ($extraCheck ? $extraCheck($attributeInstance) : true);
-        });
     }
 
     private function fieldGroupModel()
