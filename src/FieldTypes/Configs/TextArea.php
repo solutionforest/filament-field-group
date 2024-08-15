@@ -6,10 +6,13 @@ use Filament\Forms;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\Concerns\HasPlaceholder;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
 #[ConfigName('textArea', 'Text Area', 'General')]
 #[FormComponent(Forms\Components\Textarea::class)]
+#[DbType('mysql', 'text')]
+#[DbType('sqlite', 'text')]
 class TextArea extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Concerns\HasDefaultValue;

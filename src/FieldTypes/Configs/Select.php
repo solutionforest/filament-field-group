@@ -5,10 +5,13 @@ namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 use Filament\Forms;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
 #[ConfigName('select', 'Select', 'Choices')]
 #[FormComponent(Forms\Components\Select::class)]
+#[DbType('mysql', 'varchar')]
+#[DbType('sqlite', 'text')]
 class Select extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Concerns\HasDefaultValue;

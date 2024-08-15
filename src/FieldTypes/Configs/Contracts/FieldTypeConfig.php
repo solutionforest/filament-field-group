@@ -29,4 +29,11 @@ interface FieldTypeConfig
      * @return array<int,array<string,string>>
      */
     public static function getConfigNames(): array;
+
+    /**
+     * Get the database type mapping for the field type.
+     *
+     * @return array<string,mixed> | array<string,array<string,mixed>>
+     */
+    public static function getDbTypeMapping(string $drive = null): array;
 }

@@ -7,10 +7,13 @@ use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\Concerns\HasAffixes;
 use Filament\Forms\Components\Concerns\HasPlaceholder;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
 #[ConfigName('number', 'Number', 'General')]
 #[FormComponent(Forms\Components\TextInput::class)]
+#[DbType('mysql', 'int')]
+#[DbType('sqlite', 'integer')]
 class Number extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Concerns\HasAffixes;

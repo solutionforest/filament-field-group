@@ -8,10 +8,13 @@ use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\Concerns\HasAffixes;
 use Filament\Forms\Components\Concerns\HasPlaceholder;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
 #[ConfigName('text', 'Text', 'General')]
 #[FormComponent(Forms\Components\TextInput::class)]
+#[DbType('mysql', 'varchar')]
+#[DbType('sqlite', 'text')]
 class Text extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Concerns\CanBeLengthConstrained;
