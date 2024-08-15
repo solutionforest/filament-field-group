@@ -2,7 +2,12 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes;
 
-#[\Attribute]
+use Attribute;
+
+/**
+ * @property string $fqcn The fully qualified class name of the form component.
+ */
+#[Attribute(Attribute::TARGET_CLASS)]
 class FormComponent
 {
     public function __construct(
