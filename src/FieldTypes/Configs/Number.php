@@ -12,8 +12,8 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponen
 
 #[ConfigName('number', 'Number', 'General')]
 #[FormComponent(Forms\Components\TextInput::class)]
-#[DbType('mysql', 'int')]
-#[DbType('sqlite', 'integer')]
+#[DbType('mysql', 'decimal')]
+#[DbType('sqlite', 'numeric')]
 class Number extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Concerns\HasAffixes;
