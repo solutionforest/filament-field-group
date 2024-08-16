@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
+use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 
 class FilamentFieldGroup
 {
@@ -84,7 +85,7 @@ class FilamentFieldGroup
 
     public function findFieldGroup($name): ?Forms\Components\Component
     {
-        $fieldGroup = static::fieldGroupModel()::with('fields')->where('name', $name)->first();
+        $fieldGroup = FieldGroupConfig::getFieldGroupModelClass()::with('fields')->where('name', $name)->first();
 
         if (! $fieldGroup) {
             return null;
@@ -170,10 +171,5 @@ class FilamentFieldGroup
         }
 
         return null;
-    }
-
-    private function fieldGroupModel()
-    {
-        return config('filament-field-group.models.field_group', FieldGroup::class);
     }
 }

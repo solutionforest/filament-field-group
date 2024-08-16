@@ -4,6 +4,7 @@ namespace SolutionForest\FilamentFieldGroup\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
@@ -26,12 +27,12 @@ class FieldGroup extends Model implements Sortable
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('filament-field-group.table_names.field_groups'));
+        $this->setTable(FieldGroupConfig::getFieldGroupTableName());
     }
 
     public function fields(): HasMany
     {
-        return $this->hasMany(Field::class, 'group_id')->orderBy('sort');
+        return $this->hasMany(FieldGroupConfig::getFieldModelClass(), 'group_id')->orderBy('sort');
     }
 
     public static function boot()
