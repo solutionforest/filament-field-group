@@ -6,7 +6,6 @@ use Filament\Forms;
 use Illuminate\Support\Arr;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 
 class FilamentFieldGroup
@@ -91,35 +90,7 @@ class FilamentFieldGroup
             return null;
         }
 
-        $schema = [];
-
-        foreach ($fieldGroup->fields as $field) {
-
-            $fiFormConfig = $this->getFieldTypeConfig($field->type, $field->config);
-
-            if (! $fiFormConfig) {
-                continue;
-            }
-
-            $fiFormComponentFQCN = Arr::first(Arr::pluck($fiFormConfig->getFormComponents(), 'component'));
-            if (! $fiFormComponentFQCN) {
-                throw new \Exception("The field type config class {$fiFormConfig} does not have a FormComponent attribute.");
-            }
-
-            $fiFormComponent = $fiFormComponentFQCN::make($field->name);
-
-            // @todo - some components may not have these methods
-            $fiFormComponent->label($field->label);
-            $fiFormComponent->helperText($field->instructions);
-            $fiFormComponent->required($field->mandatory);
-
-            $fiFormConfig->applyConfig($fiFormComponent);
-
-            $schema[] = $fiFormComponent;
-        }
-
-        return Forms\Components\Section::make($fieldGroup->title)
-            ->schema($schema);
+        return $fieldGroup->toFilamentComponent();
     }
 
     /**
