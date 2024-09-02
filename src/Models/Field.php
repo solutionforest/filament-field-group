@@ -4,11 +4,11 @@ namespace SolutionForest\FilamentFieldGroup\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use SolutionForest\FilamentFieldGroup\Models\Contracts\Field as FieldContact;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
-use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
-class Field extends Model implements Sortable
+class Field extends Model implements FieldContact
 {
     use SortableTrait;
 

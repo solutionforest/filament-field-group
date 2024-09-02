@@ -2,15 +2,14 @@
 
 namespace SolutionForest\FilamentFieldGroup;
 
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
-use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
 use SolutionForest\FilamentFieldGroup\Testing\TestsFilamentFieldGroup;
+use SolutionForest\FilamentFieldGroup\Base\Manifests\ModelManifest;
+use SolutionForest\FilamentFieldGroup\Base\Manifests\ModelManifestInterface;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -57,7 +56,12 @@ class FilamentFieldGroupServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {}
+    public function registeringPackage(): void 
+    {
+        $this->app->singleton(ModelManifestInterface::class, fn () => $this->app->make(ModelManifest::class));
+
+        \SolutionForest\FilamentFieldGroup\Facades\ModelManifest::register();
+    }
 
     public function packageBooted(): void
     {
@@ -98,11 +102,7 @@ class FilamentFieldGroupServiceProvider extends PackageServiceProvider
      */
     protected function getAssets(): array
     {
-        return [
-            // AlpineComponent::make('filament-field-group', __DIR__ . '/../resources/dist/components/filament-field-group.js'),
-            // Css::make('filament-field-group-styles', __DIR__ . '/../resources/dist/filament-field-group.css'),
-            // Js::make('filament-field-group-scripts', __DIR__ . '/../resources/dist/filament-field-group.js'),
-        ];
+        return [];
     }
 
     /**
