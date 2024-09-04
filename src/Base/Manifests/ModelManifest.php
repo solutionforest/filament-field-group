@@ -71,9 +71,8 @@ class ModelManifest implements ModelManifestInterface
     /**
      * Bind a model to the interface in the container.
      *
-     * @param string $interfaceClass The interface class to bind.
-     * @param string $modelClass The model class to bind.
-     * @return void
+     * @param  string  $interfaceClass  The interface class to bind.
+     * @param  string  $modelClass  The model class to bind.
      */
     protected function bindModel(string $interfaceClass, string $modelClass): void
     {
@@ -83,7 +82,7 @@ class ModelManifest implements ModelManifestInterface
     /**
      * Guess the contract class for a given model class.
      *
-     * @param string $modelClass The model class to guess the contract for.
+     * @param  string  $modelClass  The model class to guess the contract for.
      * @return string The guessed contract class name.
      */
     protected function guessContractClass(string $modelClass): string
@@ -99,22 +98,22 @@ class ModelManifest implements ModelManifestInterface
     /**
      * Guess the model class for a given contract.
      *
-     * @param string $modelContract The model contract to guess the class for.
+     * @param  string  $modelContract  The model contract to guess the class for.
      * @return string The guessed model class name.
      */
     protected function guessModelClass(string $modelContract): string
     {
         $shortName = (new \ReflectionClass($modelContract))->getShortName();
 
-        return 'SolutionForest\\FilamentFieldGroup\\Models\\'.$shortName;
+        return 'SolutionForest\\FilamentFieldGroup\\Models\\' . $shortName;
     }
 
     /**
      * Validate that a class is an Eloquent model.
      *
-     * @param string $class The class to validate.
+     * @param  string  $class  The class to validate.
+     *
      * @throws \InvalidArgumentException If the class is not a subclass of Model.
-     * @return void
      */
     private function validateClassIsEloquentModel(string $class): void
     {

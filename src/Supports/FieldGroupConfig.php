@@ -3,10 +3,10 @@
 namespace SolutionForest\FilamentFieldGroup\Supports;
 
 use SolutionForest\FilamentFieldGroup\Facades\ModelManifest;
-use SolutionForest\FilamentFieldGroup\Models\Field;
-use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
 use SolutionForest\FilamentFieldGroup\Models\Contracts\Field as FieldContract;
 use SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup as FieldGroupContract;
+use SolutionForest\FilamentFieldGroup\Models\Field;
+use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
 
 class FieldGroupConfig
 {
