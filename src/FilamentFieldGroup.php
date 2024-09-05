@@ -3,6 +3,7 @@
 namespace SolutionForest\FilamentFieldGroup;
 
 use Filament\Forms;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
@@ -10,6 +11,62 @@ use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 
 class FilamentFieldGroup
 {
+    /**
+     * The collection of models to register.
+     */
+    protected array $models = [];
+
+    public function registerModels(): void
+    {
+        $modelClasses = config('filament-field-group.models');
+
+        foreach ($modelClasses as $modelClass) {
+            $interfaceClass = $this->guessModelContractClass($modelClass);
+            $this->models[$interfaceClass] = $modelClass;
+            $this->bindModel($interfaceClass, $modelClass);
+        }
+    }
+
+    public function getFieldGroupModelClass(): string
+    {
+        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class;
+
+        return $this->getModelClass($interfaceClass);
+    }
+
+    public function setFieldGroupModelClass($modelClass)
+    {
+        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class;
+
+        $this->validateClassIsEloquentModel($modelClass);
+
+        config()->set('filament-field-group.models.field', $modelClass);
+
+        $this->models[$interfaceClass] = $modelClass;
+
+        $this->bindModel($interfaceClass, $modelClass);
+    }
+
+    public function getFieldModelClass(): string
+    {
+        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class;
+
+        return $this->getModelClass($interfaceClass);
+    }
+
+    public function setFieldModelClass($modelClass): void
+    {
+        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class;
+
+        $this->validateClassIsEloquentModel($modelClass);
+
+        config()->set('filament-field-group.models.field', $modelClass);
+
+        $this->models[$interfaceClass] = $modelClass;
+
+        $this->bindModel($interfaceClass, $modelClass);
+    }
+
     public function getFieldTypeOptions(): array
     {
         $fieldTypes = FilamentFieldGroupPlugin::get()->getFieldTypeConfigs();
@@ -143,4 +200,65 @@ class FilamentFieldGroup
 
         return null;
     }
+
+    //region Helper methods
+    protected function replaceModelClass(string $interfaceClass, string $modelClass): void
+    {
+        switch ($interfaceClass)
+        {
+            case \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class:
+                $this->setFieldGroupModelClass($modelClass);
+                break;
+            case \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class:
+                $this->setFieldModelClass($modelClass);
+                break;
+        }
+    }
+
+    protected function getModelClass(string $interfaceClass, ?string $fallback = null): ?string
+    {
+        return $this->models[$interfaceClass] ?? $fallback;
+    }
+
+    /**
+     * Bind a model to the interface in the container.
+     *
+     * @param  string  $interfaceClass  The interface class to bind.
+     * @param  string  $modelClass  The model class to bind.
+     */
+    protected function bindModel(string $interfaceClass, string $modelClass): void
+    {
+        app()->bind($interfaceClass, $modelClass);
+    }
+
+    /**
+     * Guess the contract class for a given model class.
+     *
+     * @param  string  $modelClass  The model class to guess the contract for.
+     * @return string The guessed contract class name.
+     */
+    protected function guessModelContractClass(string $modelClass): string
+    {
+        $class = new \ReflectionClass($modelClass);
+
+        $shortName = $class->getShortName();
+        $namespace = $class->getNamespaceName();
+
+        return "{$namespace}\\Contracts\\$shortName";
+    }
+
+    /**
+     * Validate that a class is an Eloquent model.
+     *
+     * @param  string  $class  The class to validate.
+     *
+     * @throws \InvalidArgumentException If the class is not a subclass of Model.
+     */
+    private function validateClassIsEloquentModel(string $class): void
+    {
+        if (! is_subclass_of($class, Model::class)) {
+            throw new \InvalidArgumentException(sprintf('Given [%s] is not a subclass of [%s].', $class, Model::class));
+        }
+    }
+    //endregion Helper methods
 }

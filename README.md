@@ -58,12 +58,15 @@ This is the contents of the published config file:
 ```php
 return [
     'enabled' => false,
+    'models' => [
+        'field' => \SolutionForest\FilamentFieldGroup\Models\Field::class,
+        'field_group' => SolutionForest\FilamentFieldGroup\Models\FieldGroup::class,
+    ],
     'table_names' => [
         'fields' => 'advanced_fields',
         'field_groups' => 'advanced_field_groups',
     ],
 ];
-
 ```
 
 ## Usage
@@ -159,12 +162,14 @@ $panel
 
 This section allows you to customize the model used for field groups in the Filament Field Group package. By replacing the default `FieldGroup` model with your own implementation, you can extend or modify its behavior to suit your application's needs. 
 
-To do this, use the `replace` method from the `ModelManifest` facade, specifying the original model and your custom model. Here's an example:
+To do this, use the `setFieldGroupModelClass` or `setFieldModelClass` methods from the `FilamentFieldGroup` facade, specifying the original model and your custom model. Here's an example:
 
 ```php
-\SolutionForest\FilamentFieldGroup\Facades\ModelManifest::replace(
-    \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class,
+\SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::setFieldGroupModelClass(
     Your\Models\FieldGroup::class
+);
+\SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::setFieldModelClass(
+    Your\Models\Field::class
 );
 ```
 

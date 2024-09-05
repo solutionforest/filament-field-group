@@ -7,8 +7,6 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
-use SolutionForest\FilamentFieldGroup\Base\Manifests\ModelManifest;
-use SolutionForest\FilamentFieldGroup\Base\Manifests\ModelManifestInterface;
 use SolutionForest\FilamentFieldGroup\Testing\TestsFilamentFieldGroup;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -56,15 +54,10 @@ class FilamentFieldGroupServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function registeringPackage(): void
-    {
-        $this->app->singleton(ModelManifestInterface::class, fn () => $this->app->make(ModelManifest::class));
-
-        \SolutionForest\FilamentFieldGroup\Facades\ModelManifest::register();
-    }
-
     public function packageBooted(): void
     {
+        \SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::registerModels();
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),

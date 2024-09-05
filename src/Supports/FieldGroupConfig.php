@@ -2,11 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\Supports;
 
-use SolutionForest\FilamentFieldGroup\Facades\ModelManifest;
-use SolutionForest\FilamentFieldGroup\Models\Contracts\Field as FieldContract;
-use SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup as FieldGroupContract;
-use SolutionForest\FilamentFieldGroup\Models\Field;
-use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 
 class FieldGroupConfig
 {
@@ -17,7 +13,7 @@ class FieldGroupConfig
 
     public static function getFieldGroupModelClass(): string
     {
-        $class = ModelManifest::get(FieldGroupContract::class, FieldGroup::class);
+        $class = FilamentFieldGroup::getFieldGroupModelClass();
 
         return self::ensureClassExists($class, 'FieldGroup model');
     }
@@ -29,7 +25,7 @@ class FieldGroupConfig
 
     public static function getFieldModelClass(): string
     {
-        $class = ModelManifest::get(FieldContract::class, Field::class);
+        $class = FilamentFieldGroup::getFieldModelClass();
 
         return self::ensureClassExists($class, 'Field model');
     }

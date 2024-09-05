@@ -4,6 +4,7 @@ namespace SolutionForest\FilamentFieldGroup\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use SolutionForest\FilamentFieldGroup\Models\Contracts\Field as FieldContact;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 use Spatie\EloquentSortable\SortableTrait;
@@ -31,7 +32,7 @@ class Field extends Model implements FieldContact
         $this->setTable(FieldGroupConfig::getFieldTableName());
     }
 
-    public function group()
+    public function group(): BelongsTo
     {
         return $this->belongsTo(FieldGroupConfig::getFieldGroupModelClass(), 'group_id');
     }
