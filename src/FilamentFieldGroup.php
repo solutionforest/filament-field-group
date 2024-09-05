@@ -204,13 +204,14 @@ class FilamentFieldGroup
     //region Helper methods
     protected function replaceModelClass(string $interfaceClass, string $modelClass): void
     {
-        switch ($interfaceClass)
-        {
+        switch ($interfaceClass) {
             case \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class:
                 $this->setFieldGroupModelClass($modelClass);
+
                 break;
             case \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class:
                 $this->setFieldModelClass($modelClass);
+
                 break;
         }
     }
