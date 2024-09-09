@@ -88,16 +88,16 @@ use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
 $panel
     ->plugin(FilamentFieldGroupPlugin::make()->enablePlugin());
 ```
-![Filament Field Group](./docs-assets/images/initial-resource.png)
+![Filament Field Group](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/initial-resource.png)
 
 3. Create field groups and fields, for example:
 
    - Navigate to the Field Group resource in your Filament admin panel.
    - Create a new field group (e.g., "User Basic Info").
    - Add fields to the group (e.g., name, email, etc.).
-![Create Field Group and Field](./docs-assets/images/add-field-1.png)
-![Create Field Group and Field](./docs-assets/images/add-field-2.png)
-![Create Field Group and Field](./docs-assets/images/add-field-3.png)
+![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/add-field-1.png)
+![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/add-field-2.png)
+![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/add-field-3.png)
 
 4. Apply field groups to your form schema:
 ```php
@@ -114,7 +114,7 @@ public static function form(Form $form): Form
         ]);
 }
 ```
-![Apply Field Group](./docs-assets/images/apply-field-group.png)
+![Apply Field Group](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/apply-field-group.png)
    
 ## Available Components
 
