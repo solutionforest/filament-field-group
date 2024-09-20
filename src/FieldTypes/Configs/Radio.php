@@ -8,7 +8,6 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\FieldTypeBaseConfig;
 
 #[ConfigName('radio', 'Radio', 'Choices', 'heroicon-o-check-circle')]
 #[FormComponent(Forms\Components\Radio::class)]

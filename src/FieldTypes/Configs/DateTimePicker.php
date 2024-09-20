@@ -13,10 +13,10 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponen
 #[DbType('sqlite', 'text')]
 class DateTimePicker extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
-    use Concerns\HasDefaultValue;
     use Concerns\HasAffixes;
-    use Concerns\HasRules;
+    use Concerns\HasDefaultValue;
     use Concerns\HasPlaceholder;
+    use Concerns\HasRules;
 
     public bool $hasTime = true;
 

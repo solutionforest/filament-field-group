@@ -112,10 +112,11 @@ class FieldsRelationManager extends RelationManager
                     ->label(__('filament-field-group::filament-field-group.tables.fields.type'))
                     ->formatStateUsing(fn ($state) => FilamentFieldGroup::getFieldTypeDisplayValue($state))
                     ->icon(function ($state) {
-                        $icon =  FilamentFieldGroup::getFieldTypeIcon($state);
+                        $icon = FilamentFieldGroup::getFieldTypeIcon($state);
                         if (! $icon) {
                             return null;
                         }
+
                         return $icon;
                     }),
             ])

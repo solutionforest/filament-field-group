@@ -104,15 +104,15 @@ class FilamentFieldGroup
             return [$group => Arr::pluck($options, 'display', 'name')];
         })->toArray();
     }
-    
+
     public function getFieldTypeGroupedKeyValueWithIconOptions(): array
     {
         return collect($this->getFieldTypeOptions())->mapToGroups(function ($item) {
             return [$item['group'] => $item];
         })->mapWithKeys(function ($options, $group) {
-            
+
             $optionKeyValue = collect($options)->mapWithKeys(function ($option) {
-                
+
                 $icon = $option['icon'];
                 $value = $option['display'];
 

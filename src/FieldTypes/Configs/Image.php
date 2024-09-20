@@ -17,7 +17,7 @@ class Image extends File implements FieldTypeConfig
     public function applyConfig(Forms\Components\Component $component): void
     {
         parent::applyConfig($component);
-        
+
         $component->image();
     }
 }

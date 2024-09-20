@@ -7,7 +7,6 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\FieldTypeBaseConfig;
 
 #[ConfigName('toggle', 'Toggle', 'Choices', 'heroicon-o-adjustments-horizontal')]
 #[FormComponent(Forms\Components\Toggle::class)]
@@ -20,7 +19,5 @@ class Toggle extends FieldTypeBaseConfig implements FieldTypeConfig
         return [];
     }
 
-    public function applyConfig(Forms\Components\Component $component): void
-    {
-    }
+    public function applyConfig(Forms\Components\Component $component): void {}
 }

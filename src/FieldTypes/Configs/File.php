@@ -13,7 +13,6 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\FieldTypeBaseConfig;
 
 #[ConfigName('file', 'File', 'Content', 'heroicon-o-cloud-arrow-up')]
 #[FormComponent(Forms\Components\FileUpload::class)]
@@ -91,7 +90,7 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
     {
         $component
             ->visibility($this->visibility ? 'public' : 'private');
-            
+
         if (static::fiComponentHasTrait($component, CanBeValidated::class)) {
             if ($this->rule) {
                 $component->rule($this->rule);
@@ -110,11 +109,11 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
             $component->multiple();
         }
 
-        if (!empty($this->acceptedFileTypes)) {
+        if (! empty($this->acceptedFileTypes)) {
             $component->acceptedFileTypes(array_filter($this->acceptedFileTypes));
         }
 
-        if (!empty($this->sizeLimit)) {
+        if (! empty($this->sizeLimit)) {
             if (isset($this->sizeLimit['min'])) {
                 $component->minSize($this->sizeLimit['min']);
             }
@@ -123,7 +122,7 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
             }
         }
 
-        if (!empty($this->fileLimit)) {
+        if (! empty($this->fileLimit)) {
             if (isset($this->fileLimit['min'])) {
                 $component->minFiles($this->fileLimit['min']);
             }
@@ -165,13 +164,13 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
         });
 
         $component->dehydrateStateUsing(static function (BaseFileUpload $component): string | array | null {
-            
+
             $component->saveUploadedFiles();
 
             $state = $component->getState();
 
             $files = array_values($state ?? []);
-            
+
             if ($component->isMultiple()) {
                 return $files;
             }
