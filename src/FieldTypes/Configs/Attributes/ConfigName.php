@@ -8,6 +8,7 @@ use Attribute;
  * @property string $name The name of the field type configuration.
  * @property string $label The label of the field type configuration.
  * @property string $group The group of the field type configuration.
+ * @property ?string $icon The icon of the field type configuration.
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class ConfigName
@@ -16,5 +17,6 @@ class ConfigName
         public string $name,
         public string $label,
         public string $group,
+        public ?string $icon = null,
     ) {}
 }

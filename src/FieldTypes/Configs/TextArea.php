@@ -9,7 +9,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('textArea', 'Text Area', 'General')]
+#[ConfigName('textArea', 'Text Area', 'General', 'heroicon-o-pencil')]
 #[FormComponent(Forms\Components\Textarea::class)]
 #[DbType('mysql', 'text')]
 #[DbType('sqlite', 'text')]

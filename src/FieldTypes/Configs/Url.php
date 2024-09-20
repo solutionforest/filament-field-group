@@ -10,7 +10,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('url', 'URL', 'General')]
+#[ConfigName('url', 'URL', 'General', 'heroicon-o-globe-alt')]
 #[FormComponent(Forms\Components\TextInput::class)]
 #[DbType('mysql', 'varchar')]
 class Url extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig

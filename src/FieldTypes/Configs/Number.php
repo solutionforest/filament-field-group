@@ -10,7 +10,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('number', 'Number', 'General')]
+#[ConfigName('number', 'Number', 'General', 'heroicon-o-hashtag')]
 #[FormComponent(Forms\Components\TextInput::class)]
 #[DbType('mysql', 'decimal')]
 #[DbType('sqlite', 'numeric')]

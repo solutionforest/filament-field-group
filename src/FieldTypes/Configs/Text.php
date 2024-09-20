@@ -11,7 +11,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('text', 'Text', 'General')]
+#[ConfigName('text', 'Text', 'General', 'heroicon-o-pencil')]
 #[FormComponent(Forms\Components\TextInput::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]

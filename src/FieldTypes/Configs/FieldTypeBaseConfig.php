@@ -95,6 +95,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
                 'name' => $attributeInstance->name,
                 'label' => $attributeInstance->label,
                 'group' => $attributeInstance->group,
+                'icon' => $attributeInstance->icon,
             ];
         }
 

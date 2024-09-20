@@ -8,7 +8,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('select', 'Select', 'Choices')]
+#[ConfigName('select', 'Select', 'Choices', 'heroicon-o-chevron-up-down')]
 #[FormComponent(Forms\Components\Select::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]

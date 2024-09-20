@@ -5,6 +5,7 @@ namespace SolutionForest\FilamentFieldGroup;
 use Filament\Forms;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
@@ -85,6 +86,7 @@ class FilamentFieldGroup
                 'name' => $targetAttributes['name'],
                 'display' => $targetAttributes['label'],
                 'group' => $targetAttributes['group'],
+                'icon' => $targetAttributes['icon'],
             ];
         }
 
@@ -102,6 +104,47 @@ class FilamentFieldGroup
             return [$group => Arr::pluck($options, 'display', 'name')];
         })->toArray();
     }
+    
+    public function getFieldTypeGroupedKeyValueWithIconOptions(): array
+    {
+        return collect($this->getFieldTypeOptions())->mapToGroups(function ($item) {
+            return [$item['group'] => $item];
+        })->mapWithKeys(function ($options, $group) {
+            
+            $optionKeyValue = collect($options)->mapWithKeys(function ($option) {
+                
+                $icon = $option['icon'];
+                $value = $option['display'];
+
+                $displayText = $icon ?
+                    Blade::render(<<<'blade'
+                        <div class="flex items-center gap-2">
+                            <x-filament::icon
+                                icon="{{$icon}}"
+                                class="h-5 w-5"
+                            />
+                            <span>
+                                {{ $value }}
+                            </span>
+                        </div>
+                    blade, ['icon' => $icon, 'value' => $value]) :
+                    Blade::render(<<<'blade'
+                        <div class="flex items-center gap-2">
+                            <div class="h-5 w-5"></div>
+                            <span>
+                                {{ $value }}
+                            </span>
+                        </div>
+                    blade, ['value' => $value]);
+
+                return [$option['name'] => $displayText];
+            })->all();
+
+            return [
+                $group => $optionKeyValue,
+            ];
+        })->toArray();
+    }
 
     /**
      * @param  string  $name
@@ -116,6 +159,21 @@ class FilamentFieldGroup
 
         // Get the display value from the attribute of the field type
         return data_get(Arr::first($fieldTypeConfig->getConfigNames()), 'label');
+    }
+
+    /**
+     * @param  string  $name
+     */
+    public function getFieldTypeIcon($name): ?string
+    {
+        $fieldTypeConfig = $this->getFieldTypeConfig($name);
+
+        if (! $fieldTypeConfig) {
+            return null;
+        }
+
+        // Get the display value from the attribute of the field type
+        return data_get(Arr::first($fieldTypeConfig->getConfigNames()), 'icon');
     }
 
     /**

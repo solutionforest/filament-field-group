@@ -9,7 +9,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('password', 'Password', 'General')]
+#[ConfigName('password', 'Password', 'General', 'heroicon-o-lock-closed')]
 #[FormComponent(Forms\Components\TextInput::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]

@@ -10,7 +10,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
-#[ConfigName('email', 'Email', 'General')]
+#[ConfigName('email', 'Email', 'General', 'heroicon-c-at-symbol')]
 #[FormComponent(Forms\Components\TextInput::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]

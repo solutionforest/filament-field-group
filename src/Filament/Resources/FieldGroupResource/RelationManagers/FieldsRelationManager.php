@@ -27,8 +27,9 @@ class FieldsRelationManager extends RelationManager
                         Forms\Components\Select::make('type')
                             ->label(__('filament-field-group::filament-field-group.forms.fields.type.label'))
                             ->helperText(__('filament-field-group::filament-field-group.forms.fields.type.helper'))
-                            ->options(FilamentFieldGroup::getFieldTypeGroupedKeyValueOptions())
+                            ->options(FilamentFieldGroup::getFieldTypeGroupedKeyValueWithIconOptions())
                             ->searchable()
+                            ->allowHtml()
                             ->required()
                             ->columnSpan('full')
                             ->live(debounce: 500)
@@ -109,7 +110,14 @@ class FieldsRelationManager extends RelationManager
                     ->badge(),
                 Tables\Columns\TextColumn::make('type')
                     ->label(__('filament-field-group::filament-field-group.tables.fields.type'))
-                    ->formatStateUsing(fn ($state) => FilamentFieldGroup::getFieldTypeDisplayValue($state)),
+                    ->formatStateUsing(fn ($state) => FilamentFieldGroup::getFieldTypeDisplayValue($state))
+                    ->icon(function ($state) {
+                        $icon =  FilamentFieldGroup::getFieldTypeIcon($state);
+                        if (! $icon) {
+                            return null;
+                        }
+                        return $icon;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
