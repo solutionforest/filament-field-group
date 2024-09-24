@@ -63,6 +63,9 @@ class FieldGroup extends Model implements FieldGroupContact
             $fiFormComponent->label($field->label);
             $fiFormComponent->helperText($field->instructions);
             $fiFormComponent->required($field->mandatory);
+            if ($field->state_path) {
+                $fiFormComponent->statePath($field->state_path);
+            }
 
             $fiFormConfig->applyConfig($fiFormComponent);
 
