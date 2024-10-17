@@ -4,12 +4,11 @@ namespace SolutionForest\FilamentFieldGroup;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use SolutionForest\FilamentFieldGroup\Concerns\HasFieldTypes;
 use SolutionForest\FilamentFieldGroup\Concerns\HasFilamentResources;
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 
 class FilamentFieldGroupPlugin implements Plugin
 {
-    use HasFieldTypes;
     use HasFilamentResources;
 
     protected bool $enablePlugin = false;
@@ -56,5 +55,17 @@ class FilamentFieldGroupPlugin implements Plugin
         }
 
         return config('filament-field-group.enabled', false);
+    }
+
+    public function fieldTypeConfigs(array $fieldTypeConfigs, bool $override = true): static
+    {
+        FilamentFieldGroup::fieldTypeConfigs($fieldTypeConfigs, $override);
+
+        return $this;
+    }
+
+    public function getFieldTypeConfigs(): array
+    {
+        return FilamentFieldGroup::getFieldTypeConfigs();
     }
 }

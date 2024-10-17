@@ -146,16 +146,28 @@ $panel
 ```
 
 ### Custom Field Types
-You can call `fieldTypeConfigs` on `FilamentFieldGroupPlugin` to add/replace original field type config(s):
+You can add or replace original field type configurations using the `fieldTypeConfigs` method on either `FilamentFieldGroupPlugin` or `FilamentFieldGroup`. Here are two options:
+
+#### Option 1: On Your Filament Panel
 ```php
 use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
- 
+
 $panel
     ->plugin(FilamentFieldGroupPlugin::make()
         ->fieldTypeConfigs([
             // your field type config
         ], override: true)
     );
+```
+
+#### Option 2: On Your AppServiceProvider
+```php
+public function boot(): void
+{
+    \SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::fieldTypeConfigs([
+        \Your\Custom\FieldType::class
+    ], override: true);
+}
 ```
 
 ### Custom Models

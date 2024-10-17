@@ -20,15 +20,13 @@ trait HasFieldTypes
         \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\DateTimePicker::class,
     ];
 
-    public function fieldTypeConfigs(array $fieldTypeConfigs, bool $override = true): static
+    public function fieldTypeConfigs(array $fieldTypeConfigs, bool $override = true): void
     {
         if ($override) {
             $this->fieldTypeConfigs = $fieldTypeConfigs;
         } else {
             $this->fieldTypeConfigs = array_merge($this->fieldTypeConfigs, $fieldTypeConfigs);
         }
-
-        return $this;
     }
 
     public function getFieldTypeConfigs(): array

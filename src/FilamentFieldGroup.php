@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use ReflectionClass;
+use SolutionForest\FilamentFieldGroup\Concerns\HasFieldTypes;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 
 class FilamentFieldGroup
 {
+    use HasFieldTypes;
+
     /**
      * The collection of models to register.
      */
@@ -70,7 +73,7 @@ class FilamentFieldGroup
 
     public function getFieldTypeOptions(): array
     {
-        $fieldTypes = FilamentFieldGroupPlugin::get()->getFieldTypeConfigs();
+        $fieldTypes = $this->getFieldTypeConfigs();
 
         $result = [];
 
@@ -216,7 +219,7 @@ class FilamentFieldGroup
      */
     public function getFieldTypeConfig($name, array | string $data = [])
     {
-        $fieldTypes = FilamentFieldGroupPlugin::get()->getFieldTypeConfigs();
+        $fieldTypes = $this->getFieldTypeConfigs();
 
         foreach ($fieldTypes as $fieldFQCN) {
 
