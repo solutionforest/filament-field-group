@@ -79,7 +79,7 @@ class FilamentFieldGroup
 
         foreach ($fieldTypes as $fieldFQCN) {
 
-            if (!in_array(FieldTypeConfig::class, class_implements($fieldFQCN))) {
+            if (! in_array(FieldTypeConfig::class, class_implements($fieldFQCN))) {
                 throw new \Exception("The field type config class {$fieldFQCN} does not implement the FieldTypeConfig interface.");
             }
 
@@ -167,8 +167,8 @@ class FilamentFieldGroup
         if (! $fieldTypeConfig) {
             return null;
         }
-        
-        if (!in_array(FieldTypeConfig::class, class_implements($fieldTypeConfig))) {
+
+        if (! in_array(FieldTypeConfig::class, class_implements($fieldTypeConfig))) {
             throw new \Exception("The field type config class {$fieldTypeConfig} does not implement the FieldTypeConfig interface.");
         }
 
@@ -186,8 +186,8 @@ class FilamentFieldGroup
         if (! $fieldTypeConfig) {
             return null;
         }
-        
-        if (!in_array(FieldTypeConfig::class, class_implements($fieldTypeConfig))) {
+
+        if (! in_array(FieldTypeConfig::class, class_implements($fieldTypeConfig))) {
             throw new \Exception("The field type config class {$fieldTypeConfig} does not implement the FieldTypeConfig interface.");
         }
 
