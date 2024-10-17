@@ -79,7 +79,15 @@ class FilamentFieldGroup
 
         foreach ($fieldTypes as $fieldFQCN) {
 
+            if (!in_array(FieldTypeConfig::class, class_implements($fieldFQCN))) {
+                throw new \Exception("The field type config class {$fieldFQCN} does not implement the FieldTypeConfig interface.");
+            }
+
             $targetAttributes = Arr::first($fieldFQCN::getConfigNames());
+
+            if (! $targetAttributes) {
+                throw new \Exception("The field type config class {$fieldFQCN} does not have a valid config names.");
+            }
 
             if (count($targetAttributes) === 0 || ! $targetAttributes) {
                 continue;
@@ -159,6 +167,10 @@ class FilamentFieldGroup
         if (! $fieldTypeConfig) {
             return null;
         }
+        
+        if (!in_array(FieldTypeConfig::class, class_implements($fieldTypeConfig))) {
+            throw new \Exception("The field type config class {$fieldTypeConfig} does not implement the FieldTypeConfig interface.");
+        }
 
         // Get the display value from the attribute of the field type
         return data_get(Arr::first($fieldTypeConfig->getConfigNames()), 'label');
@@ -173,6 +185,10 @@ class FilamentFieldGroup
 
         if (! $fieldTypeConfig) {
             return null;
+        }
+        
+        if (!in_array(FieldTypeConfig::class, class_implements($fieldTypeConfig))) {
+            throw new \Exception("The field type config class {$fieldTypeConfig} does not implement the FieldTypeConfig interface.");
         }
 
         // Get the display value from the attribute of the field type
@@ -223,9 +239,17 @@ class FilamentFieldGroup
 
         foreach ($fieldTypes as $fieldFQCN) {
 
-            $targetAttributes = Arr::where($fieldFQCN::getConfigNames(), function ($attribute) use ($name) {
+            if (! in_array(FieldTypeConfig::class, class_implements($fieldFQCN))) {
+                throw new \Exception("The field type config class {$fieldFQCN} does not implement the FieldTypeConfig interface.");
+            }
+
+            $targetAttributes = Arr::where($fieldFQCN::getConfigNames() ?? [], function ($attribute) use ($name) {
                 return $attribute['name'] === $name;
             });
+
+            if (! $targetAttributes) {
+                continue;
+            }
 
             if (count($targetAttributes) > 0) {
                 if (method_exists($fieldFQCN, 'make')) {
