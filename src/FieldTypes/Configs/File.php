@@ -51,7 +51,7 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
                                         ->placeholder('e.g. image/*')
                                 ),
                             Forms\Components\Grid::make(2)
-                                ->statePath('sizeLimit')
+                                ->statePath('fileLimit')
                                 ->schema([
                                     Forms\Components\TextInput::make('min')
                                         ->integer(),
@@ -59,7 +59,7 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
                                         ->integer(),
                                 ]),
                             Forms\Components\Grid::make(2)
-                                ->statePath('fileLimit')
+                                ->statePath('sizeLimit')
                                 ->schema([
                                     Forms\Components\TextInput::make('min')
                                         ->integer()
@@ -114,20 +114,23 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
         }
 
         if (! empty($this->sizeLimit)) {
-            if (isset($this->sizeLimit['min'])) {
-                $component->minSize($this->sizeLimit['min']);
+            if (isset($this->sizeLimit['min']) && $this->sizeLimit['min'] > 0) {
+                $component->minSize(intval($this->sizeLimit['min']));
             }
-            if (isset($this->sizeLimit['max'])) {
-                $component->maxSize($this->sizeLimit['max']);
+            if (isset($this->sizeLimit['max']) && $this->sizeLimit['max'] > 0) {
+                $component->maxSize(intval($this->sizeLimit['max']));
             }
         }
 
         if (! empty($this->fileLimit)) {
-            if (isset($this->fileLimit['min'])) {
-                $component->minFiles($this->fileLimit['min']);
+            $isMultiple = false;
+            if (isset($this->fileLimit['min']) && $this->fileLimit['min'] > 0) {
+                $component->maxFiles(intval($this->fileLimit['min']));
+                $isMultiple = true;
             }
-            if (isset($this->fileLimit['max'])) {
-                $component->maxFiles($this->fileLimit['max']);
+            if (isset($this->fileLimit['max']) && $this->fileLimit['max'] > 0) {
+                $component->maxFiles(intval($this->fileLimit['max']));
+                $isMultiple = true;
             }
         }
 
