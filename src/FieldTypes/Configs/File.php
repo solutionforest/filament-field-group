@@ -105,10 +105,6 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
             $component->directory($this->directory);
         }
 
-        if ($this->multiple) {
-            $component->multiple();
-        }
-
         if (! empty($this->acceptedFileTypes)) {
             $component->acceptedFileTypes(array_filter($this->acceptedFileTypes));
         }
@@ -123,15 +119,18 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
         }
 
         if (! empty($this->fileLimit)) {
-            $isMultiple = false;
             if (isset($this->fileLimit['min']) && $this->fileLimit['min'] > 0) {
                 $component->maxFiles(intval($this->fileLimit['min']));
-                $isMultiple = true;
+                $this->multiple = true;
             }
             if (isset($this->fileLimit['max']) && $this->fileLimit['max'] > 0) {
                 $component->maxFiles(intval($this->fileLimit['max']));
-                $isMultiple = true;
+                $this->multiple = true;
             }
+        }
+
+        if ($this->multiple) {
+            $component->multiple();
         }
 
         $component->afterStateHydrated(function ($component, $state) {
