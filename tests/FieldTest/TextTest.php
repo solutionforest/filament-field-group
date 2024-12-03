@@ -20,7 +20,7 @@ class TextTest extends BaseTestCase
         $suffixLabel = 'Suffix';
         $placeholder = 'Enter text';
         $defaultValue = 'Default Value';
-        
+
         $field = $this->initializeFormComponentAndVerify(function (Text $text) use ($maxLength, $minLength, $prefixLabel, $suffixLabel, $placeholder, $defaultValue) {
             $text->maxLength = $maxLength;
             $text->minLength = $minLength;
@@ -46,4 +46,3 @@ class TextTest extends BaseTestCase
         $this->assertEquals($defaultValue, $field->getDefaultState());
     }
 }
-

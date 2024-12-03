@@ -17,12 +17,12 @@ class NumberTest extends BaseTestCase
         $placeholder = 'Enter number here';
         $min = 1;
         $max = 10;
-        
+
         $field = $this->initializeFormComponentAndVerify(function (Number $number) use ($placeholder, $min, $max) {
             $number->placeholder = $placeholder;
             $number->minValue = $min;
             $number->maxValue = $max;
-            
+
             return $number;
         });
 

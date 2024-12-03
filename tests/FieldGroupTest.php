@@ -4,7 +4,6 @@ namespace SolutionForest\FilamentFieldGroup\Tests\Models;
 
 use SolutionForest\FilamentFieldGroup\Tests\Support\TestModels\Field;
 use SolutionForest\FilamentFieldGroup\Tests\Support\TestModels\FieldGroup;
-use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 use SolutionForest\FilamentFieldGroup\Tests\TestCase;
 
 class FieldGroupTest extends TestCase

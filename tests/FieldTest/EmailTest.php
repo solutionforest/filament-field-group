@@ -15,10 +15,10 @@ class EmailTest extends BaseTestCase
     public function it_can_apply_config()
     {
         $placeholder = 'Enter email here';
-        
+
         $field = $this->initializeFormComponentAndVerify(function (Email $email) use ($placeholder) {
             $email->placeholder = $placeholder;
-            
+
             return $email;
         });
 

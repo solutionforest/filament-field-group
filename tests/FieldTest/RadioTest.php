@@ -25,4 +25,3 @@ class RadioTest extends BaseTestCase
         $this->assertEquals($options, $field->getOptions());
     }
 }
-

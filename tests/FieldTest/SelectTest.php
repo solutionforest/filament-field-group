@@ -25,4 +25,3 @@ class SelectTest extends BaseTestCase
         $this->assertEquals($options, $field->getOptions());
     }
 }
-

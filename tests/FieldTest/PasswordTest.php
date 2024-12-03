@@ -14,7 +14,7 @@ class PasswordTest extends BaseTestCase
     /** @test */
     public function it_can_apply_config()
     {
-        $field = $this->initializeFormComponentAndVerify(fn (Password $password)  => $password);
+        $field = $this->initializeFormComponentAndVerify(fn (Password $password) => $password);
 
         $this->assertEquals(true, $field->isPassword());
     }

@@ -64,7 +64,7 @@ class TestCase extends Orchestra
     /**
      * Builds a form component for the specified field type.
      *
-     * @param \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig $fieldType The type of the field for which the form component is to be built.
+     * @param  \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig  $fieldType  The type of the field for which the form component is to be built.
      * @return array{0: \Filament\Forms\Components\Component, 1: \Filament\Forms\Components\Component}
      */
     protected function buildFormComponentForFieldType($fieldType)
@@ -77,7 +77,7 @@ class TestCase extends Orchestra
                 Field::factory([
                     'type' => $fieldTypeConfig['name'],
                     'config' => $config,
-                ]), 
+                ]),
                 'fields'
             )
             ->create();

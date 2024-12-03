@@ -26,11 +26,11 @@ abstract class BaseTestCase extends TestCase
 
         $this->assertEquals('test', $fieldType->testMacro());
     }
-    
+
     /**
      * Builds a form component and performs assertions using the provided field type callback.
      *
-     * @param callable(TField) $fieldTypeCallback A callback function that defines the field type to be used in the form component.
+     * @param  callable(TField)  $fieldTypeCallback  A callback function that defines the field type to be used in the form component.
      * @return TFieldComponent The form component.
      */
     protected function initializeFormComponentAndVerify($fieldTypeCallback)
@@ -51,6 +51,6 @@ abstract class BaseTestCase extends TestCase
      */
     private function buildFieldType()
     {
-        return new static::$fieldTypeClass();
+        return new static::$fieldTypeClass;
     }
 }

@@ -14,7 +14,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConf
 abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Macroable;
-    
+
     abstract public function applyConfig(Forms\Components\Component $component): void;
 
     abstract public function getFormSchema(): array;

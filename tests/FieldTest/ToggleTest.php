@@ -19,4 +19,3 @@ class ToggleTest extends BaseTestCase
         });
     }
 }
-

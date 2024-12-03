@@ -14,7 +14,7 @@ class ImageTest extends BaseTestCase
     /** @test */
     public function it_can_apply_config()
     {
-        $field = $this->initializeFormComponentAndVerify(fn (Image $image)   => $image);
+        $field = $this->initializeFormComponentAndVerify(fn (Image $image) => $image);
 
         $this->assertEquals(['image/*'], $field->getAcceptedFileTypes());
     }
