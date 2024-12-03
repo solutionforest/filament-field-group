@@ -77,6 +77,7 @@ class FieldsRelationManager extends RelationManager
                     ->key('configFields')
                     ->statePath('config')
                     ->collapsible()
+                    ->hidden(fn (Forms\Get $get) => blank($get('type')))
                     ->schema(function (Forms\Get $get) {
 
                         if ($get('type')) {
