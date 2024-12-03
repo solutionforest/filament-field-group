@@ -11,6 +11,11 @@ class FieldGroupConfig
         return config('filament-field-group.table_names.field_groups', 'advanced_field_groups');
     }
 
+    /**
+     * Get the class name of the field group model.
+     *
+     * @return class-string The class name of the field group model.
+     */
     public static function getFieldGroupModelClass(): string
     {
         $class = FilamentFieldGroup::getFieldGroupModelClass();
@@ -23,6 +28,11 @@ class FieldGroupConfig
         return config('filament-field-group.table_names.fields', 'advanced_fields');
     }
 
+    /**
+     * Get the class name of the field model.
+     *
+     * @return class-string The class name of the field model.
+     */
     public static function getFieldModelClass(): string
     {
         $class = FilamentFieldGroup::getFieldModelClass();
