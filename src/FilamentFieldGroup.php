@@ -116,19 +116,33 @@ class FilamentFieldGroup
         })->toArray();
     }
 
-    public function getFieldTypeGroupedKeyValueWithIconOptions(): array
+    public function getFieldTypeGroupedKeyValueWithIconOptions(?string $search = null, array $excepts = []): array
     {
-        return collect($this->getFieldTypeOptions())->mapToGroups(function ($item) {
-            return [$item['group'] => $item];
-        })->mapWithKeys(function ($options, $group) {
+        $options = $this->getFieldTypeOptions();
 
-            $optionKeyValue = collect($options)->mapWithKeys(function ($option) {
+        if (filled($search) && ! is_null($search)) {
+            $options = Arr::where(
+                $options,
+                fn ($item) => str_contains($item['name'], $search)
+            );
+        }
 
-                $icon = $option['icon'];
-                $value = $option['display'];
+        if (! empty($excepts)) {
+            $options = Arr::where(
+                $options,
+                fn ($item) => ! in_array($item['name'], $excepts)
+            );
+        }
 
-                $displayText = $icon ?
-                    Blade::render(<<<'blade'
+        return collect($options)
+            ->groupBy('group')
+            ->map(fn ($collection) => collect($collection)->mapWithKeys(function ($item) {
+
+                $icon = $item['icon'] ?? null;
+                $label = $item['display'] ?? $item['name'] ?? '';
+
+                $textWithIconHtml = filled($icon) ?
+                Blade::render(<<<'blade'
                         <div class="flex items-center gap-2">
                             <x-filament::icon
                                 icon="{{$icon}}"
@@ -138,7 +152,7 @@ class FilamentFieldGroup
                                 {{ $value }}
                             </span>
                         </div>
-                    blade, ['icon' => $icon, 'value' => $value]) :
+                    blade, ['icon' => $icon, 'value' => $label]) :
                     Blade::render(<<<'blade'
                         <div class="flex items-center gap-2">
                             <div class="h-5 w-5"></div>
@@ -146,15 +160,11 @@ class FilamentFieldGroup
                                 {{ $value }}
                             </span>
                         </div>
-                    blade, ['value' => $value]);
+                    blade, ['value' => $label]);
 
-                return [$option['name'] => $displayText];
-            })->all();
-
-            return [
-                $group => $optionKeyValue,
-            ];
-        })->toArray();
+                return [$item['name'] => $textWithIconHtml];
+            }))
+            ->toArray();
     }
 
     /**

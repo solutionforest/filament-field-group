@@ -17,7 +17,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConf
  * @method static array getFieldTypeOptions()
  * @method static ?FieldTypeConfig getFieldTypeConfig(string $name, array | string $data = [])
  * @method static array getFieldTypeGroupedKeyValueOptions()
- * @method static array getFieldTypeGroupedKeyValueWithIconOptions()
+ * @method static array getFieldTypeGroupedKeyValueWithIconOptions(?string $search = null, array $excepts = [])
  * @method static ?string getFieldTypeDisplayValue(string $name)
  * @method static ?string getFieldTypeIcon(string $name)
  * @method static array getFieldTypeConfigFormSchema(string $name)
