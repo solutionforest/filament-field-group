@@ -2,6 +2,10 @@
 
 All notable changes to `filament-field-group` will be documented in this file.
 
+## 1.0.11 - 2024-12-06
+
+**Full Changelog**: https://github.com/solutionforest/filament-field-group/compare/1.0.10...1.0.11
+
 ## 1.0.10 - 2024-12-03
 
 **Full Changelog**: https://github.com/solutionforest/filament-field-group/compare/1.0.9...1.0.10
