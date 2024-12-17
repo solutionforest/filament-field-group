@@ -24,7 +24,7 @@ class DateTimePicker extends FieldTypeBaseConfig implements Contracts\FieldTypeC
 
     public ?string $format = null;
 
-    public ?string $displatFormat = null;
+    public ?string $displayFormat = null;
 
     public bool $isNative = true;
 
@@ -47,7 +47,7 @@ class DateTimePicker extends FieldTypeBaseConfig implements Contracts\FieldTypeC
 
                             Forms\Components\Toggle::make('hasTime')->inlineLabel()->default(true),
                             Forms\Components\Toggle::make('hasDate')->inlineLabel()->default(true),
-                            Forms\Components\TextInput::make('displatFormat'),
+                            Forms\Components\TextInput::make('displayFormat'),
 
                             Forms\Components\Toggle::make('isNative')->inlineLabel()->default(true),
                         ]),
@@ -69,8 +69,8 @@ class DateTimePicker extends FieldTypeBaseConfig implements Contracts\FieldTypeC
                 $component->format($this->format);
             }
 
-            if ($this->displatFormat) {
-                $component->displatFormat($this->displatFormat);
+            if ($this->displayFormat) {
+                $component->displayFormat($this->displayFormat);
             }
 
             $component->native($this->isNative);
