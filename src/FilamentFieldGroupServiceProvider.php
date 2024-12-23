@@ -54,10 +54,13 @@ class FilamentFieldGroupServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageBooted(): void
+    public function packageRegistered(): void
     {
         \SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::registerModels();
+    }
 
+    public function packageBooted(): void
+    {
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),
