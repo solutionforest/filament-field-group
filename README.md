@@ -228,18 +228,57 @@ This allows you to modify the configuration form for field types while preservin
 
 ### Custom Models
 
-This section allows you to customize the model used for field groups in the Filament Field Group package. By replacing the default `FieldGroup` model with your own implementation, you can extend or modify its behavior to suit your application's needs. 
-
-To do this, use the `setFieldGroupModelClass` or `setFieldModelClass` methods from the `FilamentFieldGroup` facade, specifying the original model and your custom model. Here's an example:
+You can set custom models for field groups and fields in your `AppServiceProvider`:
 
 ```php
-\SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::setFieldGroupModelClass(
-    Your\Models\FieldGroup::class
-);
-\SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::setFieldModelClass(
-    Your\Models\Field::class
-);
+// In AppServiceProvider.php boot() method
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
+
+public function boot(): void
+{
+    FilamentFieldGroup::setFieldGroupModelClass(Your\Models\FieldGroup::class);
+    FilamentFieldGroup::setFieldModelClass(Your\Models\Field::class);
+}
 ```
+
+### Field Type Mixins
+
+You can extend field type functionality using the `mixin` method on `FieldTypeBaseConfig`. This allows you to reuse field configuration logic across different field types:
+
+```php
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\FieldTypeBaseConfig;
+
+class MyFieldTypeMixin
+{
+    public function addValidationRules()
+    {
+        return function (array $rules = []) {
+            return array_merge($rules, ['required', 'string']);
+        };
+    }
+    
+    public function addHelperText()
+    {
+        return function () {
+            return 'This is a helper text for all fields using this mixin';
+        };
+    }
+}
+
+// Apply the mixin to your field type
+FieldTypeBaseConfig::mixin(new MyFieldTypeMixin());
+```
+
+You can also apply mixins to specific field type classes:
+
+```php
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text;
+
+// Apply mixin only to Text fields
+Text::mixin(new TextFieldSpecificMixin());
+```
+
+This approach helps maintain DRY code by centralizing common field configurations that can be shared across multiple field types.
 
 ## Testing
 
