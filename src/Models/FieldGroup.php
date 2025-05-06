@@ -52,7 +52,10 @@ class FieldGroup extends Model implements FieldGroupContact
                 continue;
             }
 
-            $fiFormComponentFQCN = Arr::first(Arr::pluck($fiFormConfig->getFormComponents(), 'component'));
+            $fiFormComponentFQCN = collect($fiFormConfig->getFormComponents())
+                ->pluck('component')
+                ->filter()
+                ->first();
             if (! $fiFormComponentFQCN) {
                 throw new \Exception("The field type config class {$fiFormConfig} does not have a FormComponent attribute.");
             }

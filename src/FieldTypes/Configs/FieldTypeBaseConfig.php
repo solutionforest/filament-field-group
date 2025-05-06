@@ -3,8 +3,8 @@
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
 use Filament\Forms;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
+use ReflectionAttribute;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
@@ -70,59 +70,53 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     /** {@inheritDoc} */
     public static function getFormComponents(): array
     {
-        $attributes = static::findFieldConfigAttribute(static::class, FormComponent::class);
+        return collect(static::getTargetFieldAttributes(FormComponent::class))
+            ->pluck('fqcn')
+            ->map(fn ($fqcn) => ['component' => $fqcn])
+            ->all();
 
-        $result = [];
-
-        // Map the attributes to array
-        foreach ($attributes as $attribute) {
-            $attributeInstance = $attribute->newInstance();
-            $result[] = [
-                'component' => $attributeInstance->fqcn,
-            ];
-        }
-
-        return $result;
     }
 
     /** {@inheritDoc} */
     public static function getConfigNames(): array
     {
-        $attributes = static::findFieldConfigAttribute(static::class, ConfigName::class);
+        $attributes = static::getTargetFieldAttributes(ConfigName::class);
 
-        $result = [];
-        // Map the attributes to array
         foreach ($attributes as $attribute) {
-            $attributeInstance = $attribute->newInstance();
+            if (! $attribute instanceof ConfigName) {
+                continue;
+            }
             $result[] = [
-                'name' => $attributeInstance->name,
-                'label' => $attributeInstance->label,
-                'group' => $attributeInstance->group,
-                'icon' => $attributeInstance->icon,
+                'name' => $attribute->name,
+                'label' => $attribute->label,
+                'group' => $attribute->group,
+                'icon' => $attribute->icon,
             ];
         }
-
-        return $result;
+        return $result ?? [];
     }
 
     /** {@inheritDoc} */
     public static function getDbTypeMapping(?string $drive = null): array
     {
-        $attributes = static::findFieldConfigAttribute(static::class, DbType::class);
+        $attributes = static::getTargetFieldAttributes(DbType::class);
+
+        $mapping = [];
 
         // Map the attributes to array
         foreach ($attributes as $attribute) {
-
-            $attributeInstance = $attribute->newInstance();
-
-            // throw exception if drive is duplicated in mapping
-            if (isset($mapping[$attributeInstance->drive])) {
-                throw new \Exception("The drive {$attributeInstance->drive} is duplicated in the mapping.");
+            if (! $attribute instanceof DbType) {
+                continue;
             }
 
-            $mapping[$attributeInstance->drive] = [
-                'type' => $attributeInstance->type,
-                'length' => $attributeInstance->length,
+            // throw exception if drive is duplicated in mapping
+            if (isset($mapping[$attribute->drive])) {
+                throw new \Exception("The drive {$attribute->drive} is duplicated in the mapping.");
+            }
+
+            $mapping[$attribute->drive] = [
+                'type' => $attribute->type,
+                'length' => $attribute->length,
             ];
         }
 
@@ -130,7 +124,25 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
             return $mapping[$drive] ?? [];
         }
 
-        return $mapping;
+        return $mapping ?? [];
+    }
+
+    /** {@inheritDoc} */
+    public static function getFieldAttributes()
+    {
+        $reflection = new ReflectionClass(static::class);
+
+        return $reflection->getAttributes();
+    }
+    
+    /** {@inheritDoc} */
+    public static function getTargetFieldAttributes($target)
+    {
+        return collect(static::getFieldAttributes())
+            ->whereInstanceOf(ReflectionAttribute::class)
+            ->filter(fn (ReflectionAttribute $attribute) => $attribute->getName() === $target)
+            ->map(fn (ReflectionAttribute $attribute) => $attribute->newInstance())
+            ->all();
     }
 
     public function __toArray(): array
@@ -144,19 +156,5 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     public function __toString(): string
     {
         return json_encode($this->__toArray());
-    }
-
-    private static function findFieldConfigAttribute($objectOrFQCN, $attributeFQCN, ?\Closure $extraCheck = null)
-    {
-        $reflection = new ReflectionClass($objectOrFQCN);
-
-        $attributes = $reflection->getAttributes();
-
-        return Arr::where($attributes, function ($attribute) use ($attributeFQCN, $extraCheck) {
-            $attributeInstance = $attribute->newInstance();
-
-            return $attribute->getName() === $attributeFQCN &&
-                ($extraCheck ? $extraCheck($attributeInstance) : true);
-        });
     }
 }

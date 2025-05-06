@@ -3,6 +3,7 @@
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts;
 
 use Filament\Forms;
+use ReflectionAttribute;
 
 interface FieldTypeConfig
 {
@@ -36,4 +37,19 @@ interface FieldTypeConfig
      * @return array<string,mixed> | array<string,array<string,mixed>>
      */
     public static function getDbTypeMapping(?string $drive = null): array;
+
+    /**
+     * Retrieves the attributes associated with the field type.
+     *
+     * @return array<mixed>|ReflectionAttribute[]
+     */
+    public static function getFieldAttributes();
+    
+    /**
+     * Retrieves the attributes associated with the target class.
+     * 
+     * @param class-string $target
+     * @return ReflectionAttribute[]
+     */
+    public static function getTargetFieldAttributes($target);
 }
