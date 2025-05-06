@@ -13,6 +13,13 @@ interface FieldTypeConfig
     public function getFormSchema(): array;
 
     /**
+     * Get the form schema for the field type configuration.
+     *
+     * @return array
+     */
+    public function getFormSchemaForConfig();
+
+    /**
      * Apply the configuration to the component.
      */
     public function applyConfig(Forms\Components\Component $component): void;

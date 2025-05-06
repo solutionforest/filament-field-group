@@ -22,6 +22,8 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConf
  * @method static ?string getFieldTypeIcon(string $name)
  * @method static array getFieldTypeConfigFormSchema(string $name)
  * @method static ?Forms\Components\Component findFieldGroup(string $name)
+ * @method static void configureFieldTypeConfigFormUsing(string $fieldTypeConfig, \Closure $callback)
+ * @method static array configureFieldTypeConfigForm(string|FieldTypeConfig|FieldTypeBaseConfig $fieldTypeConfig, array $schema)
  *
  * @see \SolutionForest\FilamentFieldGroup\FilamentFieldGroup
  */

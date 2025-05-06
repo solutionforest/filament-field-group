@@ -158,10 +158,16 @@ $panel
 ```
 
 ### Custom Field Types
-You can add or replace original field type configurations using the `fieldTypeConfigs` method on either `FilamentFieldGroupPlugin` or `FilamentFieldGroup`. Here are two options:
 
-#### Option 1: On Your Filament Panel
+You can add your own custom field types by following these steps:
+
+1. Create a field type class that extends `SolutionForest\FilamentFieldGroup\FieldTypes\Configs\FieldTypeBaseConfig`
+2. Implement the required methods, particularly `getFormSchema()` which defines the form fields
+3. Register your custom field type using one of the methods below:
+
 ```php
+// Option 1: On Your Filament Panel
+
 use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
 
 $panel
@@ -172,15 +178,47 @@ $panel
     );
 ```
 
-#### Option 2: On Your AppServiceProvider
 ```php
+// Option 2: On Your AppServiceProvider
+
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
+
 public function boot(): void
 {
-    \SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::fieldTypeConfigs([
+    FilamentFieldGroup::fieldTypeConfigs([
         \Your\Custom\FieldType::class
     ], override: true);
 }
 ```
+
+To completely replace all default field types, set the `override` parameter to `true`.
+
+#### Customizing Field Type Config Form
+
+You can customize the `config` form for specific field types by adding your own custom options. This is useful when you need to extend the functionality of existing field types with additional **configuration parameters**.
+
+```php
+// In AppServiceProvider.php boot() method
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
+
+public function boot(): void
+{
+    FilamentFieldGroup::configureFieldTypeConfigFormUsing(
+        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text::class,
+        function ($field, array $schema) {
+            return [
+                ...$schema,
+                // Your additional config form fields
+                Toggle::make('datalist'),
+                // More custom configuration options...
+            ];
+        }
+    );
+}
+```
+
+This allows you to modify the configuration form for field types while preserving all the default options.
+
 
 ### Custom Models
 

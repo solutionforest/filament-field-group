@@ -218,7 +218,7 @@ class FilamentFieldGroup
 
         try {
 
-            return $fieldTypeConfig->getFormSchema();
+            return $fieldTypeConfig->getFormSchemaForConfig();
 
         } catch (\Throwable $e) {
             // Throw have error while getting form schema

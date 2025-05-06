@@ -6,6 +6,7 @@ use Filament\Forms;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionAttribute;
 use ReflectionClass;
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
@@ -65,6 +66,15 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
         }
 
         return false;
+    }
+
+    /** {@inheritDoc} */
+    public function getFormSchemaForConfig()
+    {
+        return FilamentFieldGroup::configureFieldTypeConfigForm(
+            $this, 
+            $this->getFormSchema()
+        );
     }
 
     /** {@inheritDoc} */
