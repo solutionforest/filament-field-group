@@ -96,7 +96,7 @@ class FieldsRelationManager extends RelationManager
             ->reorderable('sort')
             ->defaultSort('sort')
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->createAnother(false),
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('sort')
