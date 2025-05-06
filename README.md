@@ -139,6 +139,12 @@ Currently, this package provides the following components:
 - Number
 - Url
 - Select
+- Toggle
+- Radio
+- File
+- Image
+- Color Picker
+- DateTime Picker
 
 More components can be added in the future. Feel free to submit a pull request if you have ideas for additional components!
 
