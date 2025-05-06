@@ -2,7 +2,9 @@
 
 namespace SolutionForest\FilamentFieldGroup\Models\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup;
 use Spatie\EloquentSortable\Sortable;
 
 /**
@@ -15,8 +17,10 @@ use Spatie\EloquentSortable\Sortable;
  * @property bool $mandatory
  * @property ?string $state_path
  * @property ?array $config
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property ?\DateTimeInterface $created_at
+ * @property ?\DateTimeInterface $updated_at
+ * 
+ * @property-read null | Model&FieldGroup $group
  */
 interface Field extends Sortable
 {

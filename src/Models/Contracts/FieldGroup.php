@@ -2,7 +2,9 @@
 
 namespace SolutionForest\FilamentFieldGroup\Models\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Spatie\EloquentSortable\Sortable;
 
 /**
@@ -10,8 +12,10 @@ use Spatie\EloquentSortable\Sortable;
  * @property string $name
  * @property bool $active
  * @property int $sort
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property ?\DateTimeInterface $created_at
+ * @property ?\DateTimeInterface $updated_at
+ * 
+ * @property-read Collection<Model & Field> $fields
  */
 interface FieldGroup extends Sortable
 {
