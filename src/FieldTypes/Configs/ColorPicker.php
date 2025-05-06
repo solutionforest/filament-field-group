@@ -15,6 +15,8 @@ class ColorPicker extends FieldTypeBaseConfig implements Contracts\FieldTypeConf
 {
     use Concerns\HasDefaultValue;
 
+    public string $colorFormat = 'hex';
+
     public function getFormSchema(): array
     {
         return [
@@ -22,6 +24,13 @@ class ColorPicker extends FieldTypeBaseConfig implements Contracts\FieldTypeConf
                 ->tabs([
                     Forms\Components\Tabs\Tab::make('Presentation')
                         ->schema([
+                            Forms\Components\Select::make('colorFormat')
+                                ->options(collect(['hsl', 'rgb', 'rgba', 'hex'])
+                                    ->mapWithKeys(fn ($item) => [$item => str($item)->upper()])
+                                    ->toArray())
+                                ->default('hex')
+                                ->required()
+                                ->selectablePlaceholder(false),
                             static::getHasDefaultValueFormComponent('defaultValue'),
                         ]),
                 ]),
@@ -32,6 +41,11 @@ class ColorPicker extends FieldTypeBaseConfig implements Contracts\FieldTypeConf
     {
         if ($this->defaultValue != null) {
             $component->default($this->defaultValue);
+        }
+        if ($component instanceof Forms\Components\ColorPicker) {
+            if ($this->colorFormat != null) {
+                $component->format($this->colorFormat);
+            }
         }
     }
 }
