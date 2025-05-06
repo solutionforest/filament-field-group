@@ -36,7 +36,10 @@ class DateTimePicker extends FieldTypeBaseConfig implements Contracts\FieldTypeC
                     Forms\Components\Tabs\Tab::make('Validation')
                         ->schema([
                             static::getHasRulesFormComponent('rule'),
-                            Forms\Components\TextInput::make('format'),
+                            Forms\Components\TextInput::make('format')
+                                ->hint('Custom the storage format.')
+                                ->placeholder('Y-m-d H:i:s')
+                                ->helperText(str('The format used to store the date in the database. More info <a href="https://filamentphp.com/docs/3.x/forms/fields/date-time-picker#customizing-the-storage-format"><u><b>here</b></u></a>.')->toHtmlString()),
                         ]),
                     Forms\Components\Tabs\Tab::make('Presentation')
                         ->schema([
@@ -47,7 +50,10 @@ class DateTimePicker extends FieldTypeBaseConfig implements Contracts\FieldTypeC
 
                             Forms\Components\Toggle::make('hasTime')->inlineLabel()->default(true),
                             Forms\Components\Toggle::make('hasDate')->inlineLabel()->default(true),
-                            Forms\Components\TextInput::make('displayFormat'),
+                            Forms\Components\TextInput::make('displayFormat')
+                                ->hint('Custom the display format.')
+                                ->placeholder('d F Y')
+                                ->helperText(str('The format used to display the date in the form. More info <a href="https://filamentphp.com/docs/3.x/forms/fields/date-time-picker#customizing-the-display-format"><u><b>here</b></u></a>.')->toHtmlString()),
 
                             Forms\Components\Toggle::make('isNative')->inlineLabel()->default(true),
                         ]),

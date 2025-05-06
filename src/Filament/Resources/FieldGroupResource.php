@@ -49,6 +49,8 @@ class FieldGroupResource extends Resource
                     ->afterStateUpdated(fn (Forms\Set $set, ?string $state) => $set('name', Str::slug($state, '_')));
                 $nameField = Forms\Components\TextInput::make('name')
                     ->label(__('filament-field-group::filament-field-group.name'))
+                    ->hint('e.g. `user_profile`')
+                    ->helperText('Unique name for the field group.')
                     ->required()
                     ->maxLength(255)
                     ->live(debounce: 500)
