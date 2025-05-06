@@ -4,7 +4,6 @@ namespace SolutionForest\FilamentFieldGroup\Models\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup;
 use Spatie\EloquentSortable\Sortable;
 
 /**
@@ -19,7 +18,6 @@ use Spatie\EloquentSortable\Sortable;
  * @property ?array $config
  * @property ?\DateTimeInterface $created_at
  * @property ?\DateTimeInterface $updated_at
- * 
  * @property-read null | Model&FieldGroup $group
  */
 interface Field extends Sortable

@@ -4,7 +4,6 @@ namespace SolutionForest\FilamentFieldGroup\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Arr;
 use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 use SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup as FieldGroupContact;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;

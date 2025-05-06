@@ -296,7 +296,7 @@ class FilamentFieldGroup
         return null;
     }
 
-    //region Helper methods
+    // region Helper methods
     protected function replaceModelClass(string $interfaceClass, string $modelClass): void
     {
         switch ($interfaceClass) {
@@ -356,5 +356,5 @@ class FilamentFieldGroup
             throw new \InvalidArgumentException(sprintf('Given [%s] is not a subclass of [%s].', $class, Model::class));
         }
     }
-    //endregion Helper methods
+    // endregion Helper methods
 }

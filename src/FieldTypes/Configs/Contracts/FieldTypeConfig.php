@@ -51,11 +51,11 @@ interface FieldTypeConfig
      * @return array<mixed>|ReflectionAttribute[]
      */
     public static function getFieldAttributes();
-    
+
     /**
      * Retrieves the attributes associated with the target class.
-     * 
-     * @param class-string $target
+     *
+     * @param  class-string  $target
      * @return ReflectionAttribute[]
      */
     public static function getTargetFieldAttributes($target);

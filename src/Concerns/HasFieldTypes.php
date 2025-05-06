@@ -47,36 +47,35 @@ trait HasFieldTypes
     }
 
     /**
-     * @param class-string<FieldTypeBaseConfig>|class-string<FieldTypeConfig> $fieldTypeConfig
-     * @param Closure $callback
+     * @param  class-string<FieldTypeBaseConfig>|class-string<FieldTypeConfig>  $fieldTypeConfig
+     * @param  Closure  $callback
      */
     public function configureFieldTypeConfigFormUsing($fieldTypeConfig, $callback)
     {
-        if (!is_a($fieldTypeConfig, FieldTypeConfig::class, true)) {
+        if (! is_a($fieldTypeConfig, FieldTypeConfig::class, true)) {
             throw new \InvalidArgumentException('FieldTypeConfig must be an instance of ' . FieldTypeConfig::class . '.');
         }
-        
+
         $this->configuringFieldTypes[$fieldTypeConfig][] = $callback;
 
         return $this;
     }
 
     /**
-     * @param class-string<FieldTypeBaseConfig>|class-string<FieldTypeConfig>|FieldTypeBaseConfig|FieldTypeConfig $fieldTypeConfig
-     * @param array $schema
-     * 
+     * @param  class-string<FieldTypeBaseConfig>|class-string<FieldTypeConfig>|FieldTypeBaseConfig|FieldTypeConfig  $fieldTypeConfig
+     * @param  array  $schema
      * @return array
      */
     public function configureFieldTypeConfigForm($fieldTypeConfig, $schema)
     {
-        if (!is_a($fieldTypeConfig, FieldTypeConfig::class, true)) {
+        if (! is_a($fieldTypeConfig, FieldTypeConfig::class, true)) {
             throw new \InvalidArgumentException('FieldTypeConfig must be an instance of ' . FieldTypeConfig::class . '.');
         }
 
         $fieldTypeFqcn = is_string($fieldTypeConfig) ? $fieldTypeConfig : get_class($fieldTypeConfig);
 
         $configure = $this->configuringFieldTypes[$fieldTypeFqcn] ?? [];
-        if (!empty($configure) && is_array($configure)) {
+        if (! empty($configure) && is_array($configure)) {
             foreach ($configure as $callback) {
                 $schema = $callback($fieldTypeConfig, $schema);
             }

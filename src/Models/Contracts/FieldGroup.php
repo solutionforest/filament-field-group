@@ -14,7 +14,6 @@ use Spatie\EloquentSortable\Sortable;
  * @property int $sort
  * @property ?\DateTimeInterface $created_at
  * @property ?\DateTimeInterface $updated_at
- * 
  * @property-read Collection<Model & Field> $fields
  */
 interface FieldGroup extends Sortable

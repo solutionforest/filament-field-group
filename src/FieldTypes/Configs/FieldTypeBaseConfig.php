@@ -72,7 +72,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     public function getFormSchemaForConfig()
     {
         return FilamentFieldGroup::configureFieldTypeConfigForm(
-            $this, 
+            $this,
             $this->getFormSchema()
         );
     }
@@ -103,6 +103,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
                 'icon' => $attribute->icon,
             ];
         }
+
         return $result ?? [];
     }
 
@@ -144,7 +145,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 
         return $reflection->getAttributes();
     }
-    
+
     /** {@inheritDoc} */
     public static function getTargetFieldAttributes($target)
     {
