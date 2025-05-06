@@ -53,12 +53,26 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    protected function defineDatabaseMigrations()
     {
-        config()->set('database.default', 'testing');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/*.php.stub');
+    }
 
-        $migration = include __DIR__ . '/../database/migrations/create_advanced_fields_table.php.stub';
-        $migration->up();
+    protected function loadMigrationsFrom($paths): void
+    {
+        // Stub files
+        if (is_string($paths) && str($paths)->endsWith(['*.php', '*.php.stub'])) {
+            $migrationPath = realpath(str($paths)->beforeLast('/'));
+            $filePattern = (string) str($paths)->afterLast('/');
+
+            foreach (glob("{$migrationPath}/{$filePattern}") as $path) {
+
+                $migration = include $path;
+                $migration->up();
+            }
+        } else {
+            parent::loadMigrationsFrom($paths);
+        }
     }
 
     /**
