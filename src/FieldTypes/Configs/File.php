@@ -120,7 +120,7 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
 
         if (! empty($this->fileLimit)) {
             if (isset($this->fileLimit['min']) && $this->fileLimit['min'] > 0) {
-                $component->maxFiles(intval($this->fileLimit['min']));
+                $component->minFiles(intval($this->fileLimit['min']));
                 $this->multiple = true;
             }
             if (isset($this->fileLimit['max']) && $this->fileLimit['max'] > 0) {
