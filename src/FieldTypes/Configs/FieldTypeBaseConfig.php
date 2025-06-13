@@ -2,7 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
-use Filament\Forms;
+use Filament\Schemas\Components\Component;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionAttribute;
 use ReflectionClass;
@@ -16,7 +16,7 @@ abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
 {
     use Macroable;
 
-    abstract public function applyConfig(Forms\Components\Component $component): void;
+    abstract public function applyConfig(Component $component): void;
 
     abstract public function getFormSchema(): array;
 

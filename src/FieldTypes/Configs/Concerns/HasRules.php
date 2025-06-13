@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns;
 
+use Filament\Forms\Components\Textarea;
 use Filament\Forms;
 
 trait HasRules
@@ -11,7 +12,7 @@ trait HasRules
     protected static function getHasRulesFormComponent($name)
     {
         return match ($name) {
-            'rule' => Forms\Components\Textarea::make('rule')
+            'rule' => Textarea::make('rule')
                 ->helperText('Separate multiple rules with a pipe (|).')
                 ->afterStateHydrated(function ($state, $component) {
                     if ($state === null) {

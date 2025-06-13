@@ -2,21 +2,22 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Select;
+use Filament\Forms\Components\Select;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Select as SelectConfig;
 
 /**
- * @extends BaseTestCase<Select,\Filament\Forms\Components\Select>
+ * @extends BaseTestCase<SelectConfig,Select>
  */
 class SelectTest extends BaseTestCase
 {
     /** @test */
-    protected static string $fieldTypeClass = Select::class;
+    protected static string $fieldTypeClass = SelectConfig::class;
 
     public function it_can_apply_config()
     {
         $options = ['option1', 'option2', 'option3'];
 
-        $field = $this->initializeFormComponentAndVerify(function (Select $select) use ($options) {
+        $field = $this->initializeFormComponentAndVerify(function (SelectConfig $select) use ($options) {
             $select->options = $options;
 
             return $select;

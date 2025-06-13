@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
+use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
@@ -19,5 +20,5 @@ class Toggle extends FieldTypeBaseConfig implements FieldTypeConfig
         return [];
     }
 
-    public function applyConfig(Forms\Components\Component $component): void {}
+    public function applyConfig(Component $component): void {}
 }

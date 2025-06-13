@@ -2,6 +2,15 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
@@ -12,10 +21,10 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponen
 #[FormComponent(Forms\Components\Select::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]
-class Select extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
+class Select extends FieldTypeBaseConfig implements FieldTypeConfig
 {
-    use Concerns\HasDefaultValue;
-    use Concerns\HasRules;
+    use HasDefaultValue;
+    use HasRules;
 
     public array $options = [];
 
@@ -27,21 +36,21 @@ class Select extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\Tabs::make('tabs')
+            Tabs::make('tabs')
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('Validation')
+                    Tab::make('Validation')
                         ->schema([
                             static::getHasRulesFormComponent('rule'),
                         ]),
-                    Forms\Components\Tabs\Tab::make('Presentation')
+                    Tab::make('Presentation')
                         ->schema([
-                            Forms\Components\KeyValue::make('options')
+                            KeyValue::make('options')
                                 ->keyLabel('Value')
                                 ->valueLabel('Label'),
-                            Forms\Components\Toggle::make('multiple')
+                            Toggle::make('multiple')
                                 ->inlineLabel()
                                 ->default(false),
-                            Forms\Components\Textarea::make('defaultValue')
+                            Textarea::make('defaultValue')
                                 ->helperText('Separate multiple default value with a pipe (|).')
                                 ->afterStateHydrated(function ($state, $component) {
                                     if ($state === null) {
@@ -67,7 +76,7 @@ class Select extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
     /**
      * Apply the configuration to the component.
      */
-    public function applyConfig(Forms\Components\Component $component): void
+    public function applyConfig(Component $component): void
     {
         $component->options($this->options);
 

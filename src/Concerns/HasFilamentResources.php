@@ -2,12 +2,14 @@
 
 namespace SolutionForest\FilamentFieldGroup\Concerns;
 
-use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource;
+use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroups\FieldGroupResource;
+use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroups\Resources\Fields\FieldResource;
 
 trait HasFilamentResources
 {
     protected array $resources = [
         FieldGroupResource::class,
+        FieldResource::class,
     ];
 
     public function resources(array $resources, bool $override = true): static

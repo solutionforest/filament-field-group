@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\Models\Contracts;
 
+use Filament\Schemas\Components\Component;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -21,7 +22,7 @@ interface FieldGroup extends Sortable
     public function fields(): HasMany;
 
     /**
-     * @return \Filament\Forms\Components\Component
+     * @return Component
      */
     public function toFilamentComponent();
 }

@@ -2,6 +2,8 @@
 
 namespace SolutionForest\FilamentFieldGroup\Models;
 
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Section;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
@@ -37,7 +39,7 @@ class FieldGroup extends Model implements FieldGroupContact
     }
 
     /**
-     * @return \Filament\Forms\Components\Component
+     * @return Component
      */
     public function toFilamentComponent()
     {
@@ -74,8 +76,7 @@ class FieldGroup extends Model implements FieldGroupContact
             $schema[] = $fiFormComponent;
         }
 
-        return \Filament\Forms\Components\Section::make($this->title)
-            ->schema($schema);
+        return Section::make($this->title)->schema($schema);
     }
 
     public static function boot()

@@ -2,6 +2,13 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
+use Filament\Forms\Components\TextInput;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\Concerns\HasAffixes;
@@ -11,26 +18,26 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 
 #[ConfigName('email', 'Email', 'General', 'heroicon-c-at-symbol')]
-#[FormComponent(Forms\Components\TextInput::class)]
+#[FormComponent(TextInput::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]
-class Email extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
+class Email extends FieldTypeBaseConfig implements FieldTypeConfig
 {
     use Concerns\HasAffixes;
-    use Concerns\HasDefaultValue;
+    use HasDefaultValue;
     use Concerns\HasPlaceholder;
-    use Concerns\HasRules;
+    use HasRules;
 
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\Tabs::make('tabs')
+            Tabs::make('tabs')
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('Validation')
+                    Tab::make('Validation')
                         ->schema([
                             static::getHasRulesFormComponent('rule'),
                         ]),
-                    Forms\Components\Tabs\Tab::make('Presentation')
+                    Tab::make('Presentation')
                         ->schema([
                             static::getHasDefaultValueFormComponent('defaultValue'),
                             static::getHasPlaceholderFormComponent('placeholder'),
@@ -41,7 +48,7 @@ class Email extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
         ];
     }
 
-    public function applyConfig(Forms\Components\Component $component): void
+    public function applyConfig(Component $component): void
     {
         if (static::fiComponentHasTrait($component, HasAffixes::class)) {
             if ($this->prefixLabel) {
@@ -64,7 +71,7 @@ class Email extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
         if ($this->defaultValue != null) {
             $component->default($this->defaultValue);
         }
-        if ($component instanceof Forms\Components\TextInput) {
+        if ($component instanceof TextInput) {
             $component->email();
         }
     }

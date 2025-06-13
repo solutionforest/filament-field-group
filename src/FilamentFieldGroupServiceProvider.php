@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup;
 
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
@@ -56,7 +57,7 @@ class FilamentFieldGroupServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        \SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup::registerModels();
+        FilamentFieldGroup::registerModels();
     }
 
     public function packageBooted(): void

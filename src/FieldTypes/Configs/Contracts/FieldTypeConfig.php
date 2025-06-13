@@ -2,7 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts;
 
-use Filament\Forms;
+use Filament\Schemas\Components\Component;
 use ReflectionAttribute;
 
 interface FieldTypeConfig
@@ -22,7 +22,7 @@ interface FieldTypeConfig
     /**
      * Apply the configuration to the component.
      */
-    public function applyConfig(Forms\Components\Component $component): void;
+    public function applyConfig(Component $component): void;
 
     /**
      * Get the form components for the field type.

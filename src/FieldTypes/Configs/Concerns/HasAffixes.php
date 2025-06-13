@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Forms;
 
 trait HasAffixes
@@ -13,8 +14,8 @@ trait HasAffixes
     protected static function getHasAffixesFormComponent($name)
     {
         return match ($name) {
-            'prefixLabel' => Forms\Components\TextInput::make('prefixLabel'),
-            'suffixLabel' => Forms\Components\TextInput::make('suffixLabel'),
+            'prefixLabel' => TextInput::make('prefixLabel'),
+            'suffixLabel' => TextInput::make('suffixLabel'),
             default => null,
         };
     }

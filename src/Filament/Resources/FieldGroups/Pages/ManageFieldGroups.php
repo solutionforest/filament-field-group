@@ -1,12 +1,12 @@
 <?php
 
-namespace SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource\Pages;
+namespace SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroups\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
-use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroupResource;
+use SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroups\FieldGroupResource;
 
-class ManageFieldGroup extends ManageRecords
+class ManageFieldGroups extends ManageRecords
 {
     protected static string $resource = FieldGroupResource::class;
 

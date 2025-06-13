@@ -2,6 +2,12 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\Models;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Text;
+use Filament\Schemas\Schema;
+use Illuminate\Support\Arr;
+use SolutionForest\FilamentFieldGroup\Tests\Fixtures\Livewire\Livewire;
 use SolutionForest\FilamentFieldGroup\Tests\Support\TestModels\Field;
 use SolutionForest\FilamentFieldGroup\Tests\Support\TestModels\FieldGroup;
 use SolutionForest\FilamentFieldGroup\Tests\TestCase;
@@ -27,16 +33,28 @@ class FieldGroupTest extends TestCase
         ]);
 
         // Act
-        $component = $fieldGroup->toFilamentComponent();
+        $component = $fieldGroup
+            ->toFilamentComponent()
+            ->container(Schema::make(Livewire::make()));
 
         // Assert
-        $this->assertInstanceOf(\Filament\Forms\Components\Section::class, $component);
+        $this->assertInstanceOf(Section::class, $component);
         $this->assertEquals('Test Group', $component->getHeading());
         $this->assertCount(1, $component->getChildComponents());
-        $this->assertEquals('test_field', $component->getChildComponents()[0]->getName());
-        $this->assertEquals('Test Field', $component->getChildComponents()[0]->getLabel());
-        $this->assertEquals('Test instructions', $component->getChildComponents()[0]->getHelperText());
-        $this->assertTrue($component->getChildComponents()[0]->isRequired());
+        // /**
+        //  * @var TextInput
+        //  */
+        $textInputComponent = Arr::first($component->getChildComponents());
+        $this->assertTrue($textInputComponent != null);
+        $this->assertEquals('test_field', $textInputComponent->getName());
+        $this->assertEquals('Test Field', $textInputComponent->getLabel());
+        // /**
+        //  * @var Text
+        //  */
+        $helperTextComponent = $textInputComponent ? Arr::first($textInputComponent->getChildComponents('below_content')) : null;
+        $this->assertTrue($helperTextComponent != null);
+        $this->assertEquals('Test instructions', $helperTextComponent->getContent());
+        $this->assertTrue($textInputComponent->isRequired());
     }
 
     /** @test */

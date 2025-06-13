@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\Supports;
 
+use Exception;
 use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 
 class FieldGroupConfig
@@ -47,12 +48,12 @@ class FieldGroupConfig
      * @param  string  $type  A description of the class type (e.g., 'model', 'service')
      * @return string The class name if it exists
      *
-     * @throws \Exception If the class does not exist
+     * @throws Exception If the class does not exist
      */
     protected static function ensureClassExists(string $class, string $type): string
     {
         if (! class_exists($class)) {
-            throw new \Exception("The {$type} class '{$class}' does not exist. Please check your configuration.");
+            throw new Exception("The {$type} class '{$class}' does not exist. Please check your configuration.");
         }
 
         return $class;

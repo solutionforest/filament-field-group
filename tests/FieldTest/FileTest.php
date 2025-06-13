@@ -2,14 +2,15 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\File;
+use Filament\Forms\Components\FileUpload;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\File as FileUploadConfig;
 
 /**
- * @extends BaseTestCase<File,\Filament\Forms\Components\FileUpload>
+ * @extends BaseTestCase<FileUploadConfig,FileUpload>
  */
 class FileTest extends BaseTestCase
 {
-    protected static string $fieldTypeClass = File::class;
+    protected static string $fieldTypeClass = FileUploadConfig::class;
 
     /** @test */
     public function it_can_apply_config()
@@ -18,7 +19,7 @@ class FileTest extends BaseTestCase
         $maxFileSize = 1024;
         $maxFiles = 1;
 
-        $field = $this->initializeFormComponentAndVerify(function (File $file) use ($accept, $maxFileSize, $maxFiles) {
+        $field = $this->initializeFormComponentAndVerify(function (FileUploadConfig $file) use ($accept, $maxFileSize, $maxFiles) {
             $file->acceptedFileTypes = $accept;
             $file->sizeLimit['max'] = $maxFileSize;
             $file->fileLimit['max'] = $maxFiles;

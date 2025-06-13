@@ -2,19 +2,20 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Image;
+use Filament\Forms\Components\FileUpload;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Image as ImageUploadConfig;
 
 /**
- * @extends BaseTestCase<Image,\Filament\Forms\Components\FileUpload>
+ * @extends BaseTestCase<ImageUploadConfig,FileUpload>
  */
 class ImageTest extends BaseTestCase
 {
-    protected static string $fieldTypeClass = Image::class;
+    protected static string $fieldTypeClass = ImageUploadConfig::class;
 
     /** @test */
     public function it_can_apply_config()
     {
-        $field = $this->initializeFormComponentAndVerify(fn (Image $image) => $image);
+        $field = $this->initializeFormComponentAndVerify(fn (ImageUploadConfig $image) => $image);
 
         $this->assertEquals(['image/*'], $field->getAcceptedFileTypes());
     }

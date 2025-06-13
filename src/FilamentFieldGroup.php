@@ -2,13 +2,15 @@
 
 namespace SolutionForest\FilamentFieldGroup;
 
-use Filament\Forms;
+use Filament\Schemas\Components\Component;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\Concerns\HasFieldTypes;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\Models\Contracts\Field;
+use SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup;
 use SolutionForest\FilamentFieldGroup\Supports\FieldGroupConfig;
 
 class FilamentFieldGroup
@@ -33,14 +35,14 @@ class FilamentFieldGroup
 
     public function getFieldGroupModelClass(): string
     {
-        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class;
+        $interfaceClass = FieldGroup::class;
 
         return $this->getModelClass($interfaceClass);
     }
 
     public function setFieldGroupModelClass($modelClass)
     {
-        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class;
+        $interfaceClass = FieldGroup::class;
 
         $this->validateClassIsEloquentModel($modelClass);
 
@@ -53,14 +55,14 @@ class FilamentFieldGroup
 
     public function getFieldModelClass(): string
     {
-        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class;
+        $interfaceClass = Field::class;
 
         return $this->getModelClass($interfaceClass);
     }
 
     public function setFieldModelClass($modelClass): void
     {
-        $interfaceClass = \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class;
+        $interfaceClass = Field::class;
 
         $this->validateClassIsEloquentModel($modelClass);
 
@@ -143,7 +145,7 @@ class FilamentFieldGroup
 
                 $textWithIconHtml = filled($icon) ?
                 Blade::render(<<<'blade'
-                        <div class="flex items-center gap-2">
+                        <div style="display:flex;gap:0.5rem;align-items:center;">
                             <x-filament::icon
                                 icon="{{$icon}}"
                                 class="h-5 w-5"
@@ -154,7 +156,7 @@ class FilamentFieldGroup
                         </div>
                     blade, ['icon' => $icon, 'value' => $label]) :
                     Blade::render(<<<'blade'
-                        <div class="flex items-center gap-2">
+                        <div style="display:flex;gap:0.5rem;align-items:center;">
                             <div class="h-5 w-5"></div>
                             <span>
                                 {{ $value }}
@@ -226,7 +228,7 @@ class FilamentFieldGroup
         }
     }
 
-    public function findFieldGroup($name): ?Forms\Components\Component
+    public function findFieldGroup($name): ?Component
     {
         $fieldGroup = FieldGroupConfig::getFieldGroupModelClass()::with('fields')->where('name', $name)->first();
 
@@ -300,11 +302,11 @@ class FilamentFieldGroup
     protected function replaceModelClass(string $interfaceClass, string $modelClass): void
     {
         switch ($interfaceClass) {
-            case \SolutionForest\FilamentFieldGroup\Models\Contracts\FieldGroup::class:
+            case FieldGroup::class:
                 $this->setFieldGroupModelClass($modelClass);
 
                 break;
-            case \SolutionForest\FilamentFieldGroup\Models\Contracts\Field::class:
+            case Field::class:
                 $this->setFieldModelClass($modelClass);
 
                 break;

@@ -3,8 +3,9 @@
 namespace SolutionForest\FilamentFieldGroup\Tests\Support\TestModels;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use SolutionForest\FilamentFieldGroup\Models\Field as BaseModel;
 
-class Field extends \SolutionForest\FilamentFieldGroup\Models\Field
+class Field extends BaseModel
 {
     use HasFactory;
 }

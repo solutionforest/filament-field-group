@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Forms;
 
 trait HasPlaceholder
@@ -11,7 +12,7 @@ trait HasPlaceholder
     protected static function getHasPlaceholderFormComponent($name)
     {
         return match ($name) {
-            'placeholder' => Forms\Components\TextInput::make('placeholder')
+            'placeholder' => TextInput::make('placeholder')
                 ->maxLength(255),
             default => null,
         };

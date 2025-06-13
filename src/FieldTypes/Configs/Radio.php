@@ -2,6 +2,11 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
@@ -22,14 +27,14 @@ class Radio extends FieldTypeBaseConfig implements FieldTypeConfig
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\Tabs::make('tabs')
+            Tabs::make('tabs')
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('Presentation')
+                    Tab::make('Presentation')
                         ->schema([
-                            Forms\Components\KeyValue::make('options')
+                            KeyValue::make('options')
                                 ->keyLabel('Value')
                                 ->valueLabel('Label'),
-                            Forms\Components\Textarea::make('defaultValue')
+                            Textarea::make('defaultValue')
                                 ->helperText('Separate multiple default value with a pipe (|).')
                                 ->afterStateHydrated(function ($state, $component) {
                                     if ($state === null) {
@@ -52,7 +57,7 @@ class Radio extends FieldTypeBaseConfig implements FieldTypeConfig
         ];
     }
 
-    public function applyConfig(Forms\Components\Component $component): void
+    public function applyConfig(Component $component): void
     {
         $component->options($this->options);
 

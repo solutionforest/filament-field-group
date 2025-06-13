@@ -2,7 +2,8 @@
 
 namespace SolutionForest\FilamentFieldGroup\Facades;
 
-use Filament\Forms;
+use Closure;
+use Filament\Schemas\Components\Component;
 use Illuminate\Support\Facades\Facade;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
@@ -21,8 +22,8 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConf
  * @method static ?string getFieldTypeDisplayValue(string $name)
  * @method static ?string getFieldTypeIcon(string $name)
  * @method static array getFieldTypeConfigFormSchema(string $name)
- * @method static ?Forms\Components\Component findFieldGroup(string $name)
- * @method static void configureFieldTypeConfigFormUsing(string $fieldTypeConfig, \Closure $callback)
+ * @method static ?Component findFieldGroup(string $name)
+ * @method static void configureFieldTypeConfigFormUsing(string $fieldTypeConfig, Closure $callback)
  * @method static array configureFieldTypeConfigForm(string|FieldTypeConfig|FieldTypeBaseConfig $fieldTypeConfig, array $schema)
  *
  * @see \SolutionForest\FilamentFieldGroup\FilamentFieldGroup

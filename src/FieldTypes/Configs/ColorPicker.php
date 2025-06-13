@@ -2,6 +2,12 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Forms\Components\Select;
+use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
@@ -11,20 +17,20 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponen
 #[FormComponent(Forms\Components\ColorPicker::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]
-class ColorPicker extends FieldTypeBaseConfig implements Contracts\FieldTypeConfig
+class ColorPicker extends FieldTypeBaseConfig implements FieldTypeConfig
 {
-    use Concerns\HasDefaultValue;
+    use HasDefaultValue;
 
     public string $colorFormat = 'hex';
 
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\Tabs::make('tabs')
+            Tabs::make('tabs')
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('Presentation')
+                    Tab::make('Presentation')
                         ->schema([
-                            Forms\Components\Select::make('colorFormat')
+                            Select::make('colorFormat')
                                 ->options(collect(['hsl', 'rgb', 'rgba', 'hex'])
                                     ->mapWithKeys(fn ($item) => [$item => str($item)->upper()])
                                     ->toArray())
@@ -37,7 +43,7 @@ class ColorPicker extends FieldTypeBaseConfig implements Contracts\FieldTypeConf
         ];
     }
 
-    public function applyConfig(Forms\Components\Component $component): void
+    public function applyConfig(Component $component): void
     {
         if ($this->defaultValue != null) {
             $component->default($this->defaultValue);

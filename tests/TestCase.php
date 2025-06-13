@@ -9,14 +9,20 @@ use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Infolists\InfolistsServiceProvider;
 use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Form;
+use Filament\Schemas\Schema;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 use SolutionForest\FilamentFieldGroup\FilamentFieldGroupServiceProvider;
+use SolutionForest\FilamentFieldGroup\Tests\Fixtures\Livewire\Livewire;
 use SolutionForest\FilamentFieldGroup\Tests\Support\TestModels\Field;
 use SolutionForest\FilamentFieldGroup\Tests\Support\TestModels\FieldGroup;
 
@@ -78,8 +84,8 @@ class TestCase extends Orchestra
     /**
      * Builds a form component for the specified field type.
      *
-     * @param  \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig  $fieldType  The type of the field for which the form component is to be built.
-     * @return array{0: \Filament\Forms\Components\Component, 1: \Filament\Forms\Components\Component}
+     * @param  FieldTypeConfig  $fieldType  The type of the field for which the form component is to be built.
+     * @return array{0: Component, 1:?Component}
      */
     protected function buildFormComponentForFieldType($fieldType)
     {
@@ -98,11 +104,13 @@ class TestCase extends Orchestra
 
         $fieldGroup->loadMissing('fields');
 
-        $component = $fieldGroup->toFilamentComponent();
+        $component = $fieldGroup
+            ->toFilamentComponent()
+            ->container(Schema::make(Livewire::make()));
 
         return [
             $component,
-            $component->getChildComponents()[0],
+            Arr::first($component->getChildComponents()),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Forms;
 
 trait HasDefaultValue
@@ -11,7 +12,7 @@ trait HasDefaultValue
     protected static function getHasDefaultValueFormComponent($name)
     {
         return match ($name) {
-            'defaultValue' => Forms\Components\TextInput::make('defaultValue')
+            'defaultValue' => TextInput::make('defaultValue')
                 ->maxLength(255),
             default => null,
         };

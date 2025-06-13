@@ -2,11 +2,13 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
+use Filament\Schemas\Components\Component;
 use SolutionForest\FilamentFieldGroup\Tests\TestCase;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
 /**
- * @template TField \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig
- * @template TFieldComponent \Filament\Forms\Components\Component
+ * @template TField FieldTypeConfig
+ * @template TFieldComponent Component
  */
 abstract class BaseTestCase extends TestCase
 {

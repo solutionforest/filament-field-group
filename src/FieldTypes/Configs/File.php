@@ -2,6 +2,14 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
+use Filament\Forms\Components\FileUpload;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use Filament\Forms\Components\BaseFileUpload;
 use Filament\Forms\Components\Concerns\CanBeValidated;
@@ -15,7 +23,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
 #[ConfigName('file', 'File', 'Content', 'heroicon-o-cloud-arrow-up')]
-#[FormComponent(Forms\Components\FileUpload::class)]
+#[FormComponent(FileUpload::class)]
 #[DbType('mysql', 'varchar')]
 #[DbType('sqlite', 'text')]
 class File extends FieldTypeBaseConfig implements FieldTypeConfig
@@ -39,46 +47,46 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
     public function getFormSchema(): array
     {
         return [
-            Forms\Components\Tabs::make('tabs')
+            Tabs::make('tabs')
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('Validation')
+                    Tab::make('Validation')
                         ->schema([
                             static::getHasRulesFormComponent('rule'),
-                            Forms\Components\Repeater::make('acceptedFileTypes')
+                            Repeater::make('acceptedFileTypes')
                                 ->defaultItems(0)
                                 ->simple(
-                                    Forms\Components\TextInput::make('type')
+                                    TextInput::make('type')
                                         ->placeholder('e.g. image/*')
                                 ),
-                            Forms\Components\Grid::make(2)
+                            Grid::make(2)
                                 ->statePath('fileLimit')
                                 ->schema([
-                                    Forms\Components\TextInput::make('min')
+                                    TextInput::make('min')
                                         ->integer(),
-                                    Forms\Components\TextInput::make('max')
+                                    TextInput::make('max')
                                         ->integer(),
                                 ]),
-                            Forms\Components\Grid::make(2)
+                            Grid::make(2)
                                 ->statePath('sizeLimit')
                                 ->schema([
-                                    Forms\Components\TextInput::make('min')
+                                    TextInput::make('min')
                                         ->integer()
                                         ->suffix('KB'),
-                                    Forms\Components\TextInput::make('max')
+                                    TextInput::make('max')
                                         ->integer()
                                         ->suffix('KB'),
                                 ]),
                         ]),
-                    Forms\Components\Tabs\Tab::make('Presentation')
+                    Tab::make('Presentation')
                         ->schema([
-                            Forms\Components\TextInput::make('disk')
+                            TextInput::make('disk')
                                 ->default(config('filesystems.default'))
                                 ->required(),
-                            Forms\Components\TextInput::make('directory'),
-                            Forms\Components\Toggle::make('visibility')
+                            TextInput::make('directory'),
+                            Toggle::make('visibility')
                                 ->inlineLabel()
                                 ->default(false),
-                            Forms\Components\Toggle::make('multiple')
+                            Toggle::make('multiple')
                                 ->inlineLabel()
                                 ->default(false),
                         ]),
@@ -86,7 +94,7 @@ class File extends FieldTypeBaseConfig implements FieldTypeConfig
         ];
     }
 
-    public function applyConfig(Forms\Components\Component $component): void
+    public function applyConfig(Component $component): void
     {
         $component
             ->visibility($this->visibility ? 'public' : 'private');

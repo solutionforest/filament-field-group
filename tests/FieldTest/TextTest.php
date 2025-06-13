@@ -2,15 +2,16 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text;
+use Filament\Forms\Components\TextInput;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text as TextInputConfig;
 
 /**
- * @extends BaseTestCase<Text,\Filament\Forms\Components\TextInput>
+ * @extends BaseTestCase<TextInputConfig,TextInput>
  */
 class TextTest extends BaseTestCase
 {
     /** @test */
-    protected static string $fieldTypeClass = Text::class;
+    protected static string $fieldTypeClass = TextInputConfig::class;
 
     public function it_can_apply_config()
     {
@@ -21,7 +22,7 @@ class TextTest extends BaseTestCase
         $placeholder = 'Enter text';
         $defaultValue = 'Default Value';
 
-        $field = $this->initializeFormComponentAndVerify(function (Text $text) use ($maxLength, $minLength, $prefixLabel, $suffixLabel, $placeholder, $defaultValue) {
+        $field = $this->initializeFormComponentAndVerify(function (TextInputConfig $text) use ($maxLength, $minLength, $prefixLabel, $suffixLabel, $placeholder, $defaultValue) {
             $text->maxLength = $maxLength;
             $text->minLength = $minLength;
 

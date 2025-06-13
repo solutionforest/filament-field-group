@@ -2,21 +2,22 @@
 
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Radio;
+use Filament\Forms\Components\Radio;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Radio as RadioConfig;
 
 /**
- * @extends BaseTestCase<Radio,\Filament\Forms\Components\Radio>
+ * @extends BaseTestCase<RadioConfig,Radio>
  */
 class RadioTest extends BaseTestCase
 {
     /** @test */
-    protected static string $fieldTypeClass = Radio::class;
+    protected static string $fieldTypeClass = RadioConfig::class;
 
     public function it_can_apply_config()
     {
         $options = ['option1', 'option2', 'option3'];
 
-        $field = $this->initializeFormComponentAndVerify(function (Radio $radio) use ($options) {
+        $field = $this->initializeFormComponentAndVerify(function (RadioConfig $radio) use ($options) {
             $radio->options = $options;
 
             return $radio;
