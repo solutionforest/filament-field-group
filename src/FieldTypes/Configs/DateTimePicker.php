@@ -2,20 +2,20 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasAffixes;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasPlaceholder;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Component;
-use Filament\Forms;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
 #[ConfigName('dateTimePicker', 'DateTime Picker', 'Picker', 'heroicon-o-calendar-date-range')]
 #[FormComponent(Forms\Components\DateTimePicker::class)]

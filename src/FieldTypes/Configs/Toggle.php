@@ -2,8 +2,8 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
-use Filament\Schemas\Components\Component;
 use Filament\Forms;
+use Filament\Schemas\Components\Component;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;

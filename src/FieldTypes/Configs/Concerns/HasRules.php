@@ -3,7 +3,6 @@
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns;
 
 use Filament\Forms\Components\Textarea;
-use Filament\Forms;
 
 trait HasRules
 {

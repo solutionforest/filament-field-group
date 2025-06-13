@@ -2,12 +2,12 @@
 
 namespace SolutionForest\FilamentFieldGroup;
 
-use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
 use SolutionForest\FilamentFieldGroup\Testing\TestsFilamentFieldGroup;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;

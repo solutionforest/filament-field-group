@@ -3,8 +3,8 @@
 namespace SolutionForest\FilamentFieldGroup\Tests\FieldTest;
 
 use Filament\Schemas\Components\Component;
-use SolutionForest\FilamentFieldGroup\Tests\TestCase;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\Tests\TestCase;
 
 /**
  * @template TField FieldTypeConfig

@@ -15,8 +15,8 @@ class FieldGroupForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
-            ->components(fn ($livewire, $operation)  => 
-                self::isEditing($livewire, $operation)
+            ->components(
+                fn ($livewire, $operation) => self::isEditing($livewire, $operation)
                     ? [
                         Section::make()
                             ->schema([
@@ -48,5 +48,5 @@ class FieldGroupForm
         }
 
         return false;
-    } 
+    }
 }

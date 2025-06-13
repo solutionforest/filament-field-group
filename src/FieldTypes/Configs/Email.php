@@ -2,20 +2,19 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
-use Filament\Forms\Components\TextInput;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Schemas\Components\Component;
-use Filament\Forms;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\Concerns\HasAffixes;
 use Filament\Forms\Components\Concerns\HasPlaceholder;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
 #[ConfigName('email', 'Email', 'General', 'heroicon-c-at-symbol')]
 #[FormComponent(TextInput::class)]
@@ -24,8 +23,8 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponen
 class Email extends FieldTypeBaseConfig implements FieldTypeConfig
 {
     use Concerns\HasAffixes;
-    use HasDefaultValue;
     use Concerns\HasPlaceholder;
+    use HasDefaultValue;
     use HasRules;
 
     public function getFormSchema(): array

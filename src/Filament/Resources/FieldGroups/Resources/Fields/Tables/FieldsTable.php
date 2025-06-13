@@ -2,8 +2,6 @@
 
 namespace SolutionForest\FilamentFieldGroup\Filament\Resources\FieldGroups\Resources\Fields\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;

@@ -18,7 +18,7 @@ class FieldGroupResource extends Resource
 {
     protected static ?string $model = FieldGroup::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedSquares2x2;
 
     public static function form(Schema $schema): Schema
     {

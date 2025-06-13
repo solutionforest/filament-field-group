@@ -38,8 +38,8 @@ class FieldForm
                                 ->getParentComponent()->getContainer() // section
                                 // ->getComponent('configFields')
                                 ->getComponent(
-                                    'form.configFields', 
-                                    withHidden: true, 
+                                    'form.configFields',
+                                    withHidden: true,
                                     isAbsoluteKey: true,
                                 )
                                 ?->getChildSchema()
@@ -87,7 +87,7 @@ class FieldForm
 
                         if ($type) {
                             return FilamentFieldGroup::getFieldTypeConfigFormSchema($type);
-                        } 
+                        }
 
                         return [];
                     }),

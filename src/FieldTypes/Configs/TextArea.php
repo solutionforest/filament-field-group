@@ -2,19 +2,19 @@
 
 namespace SolutionForest\FilamentFieldGroup\FieldTypes\Configs;
 
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
-use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Component;
 use Filament\Forms;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\Concerns\HasPlaceholder;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\ConfigName;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasDefaultValue;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Concerns\HasRules;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
 #[ConfigName('textArea', 'Text Area', 'General', 'heroicon-o-pencil')]
 #[FormComponent(Forms\Components\Textarea::class)]
@@ -22,8 +22,8 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponen
 #[DbType('sqlite', 'text')]
 class TextArea extends FieldTypeBaseConfig implements FieldTypeConfig
 {
-    use HasDefaultValue;
     use Concerns\HasPlaceholder;
+    use HasDefaultValue;
     use HasRules;
 
     public ?int $rows = null;
