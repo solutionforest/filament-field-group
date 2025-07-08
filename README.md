@@ -1,14 +1,13 @@
-
 ## About Solution Forest
 
-[Solution Forest](https://solutionforest.com) Web development agency based in Hong Kong. We help customers to solve their problems. We Love Open Soruces. 
+[Solution Forest](https://solutionforest.com) Web development agency based in Hong Kong. We help customers to solve their problems. We Love Open Soruces.
 
 We have built a collection of best-in-class products:
 
-- [VantagoAds](https://vantagoads.com): A self manage Ads Server, Simplify Your Advertising Strategy.
-- [GatherPro.events](https://gatherpro.events): A Event Photos management tools, Streamline Your Event Photos.
-- [Website CMS Management](https://filamentphp.com/plugins/solution-forest-cms-website): Website CMS Management - Filament CMS Plugin
-- [Filaletter](https://filaletter.solutionforest.net): Filaletter - Filament Newsletter Plugin
+-   [VantagoAds](https://vantagoads.com): A self manage Ads Server, Simplify Your Advertising Strategy.
+-   [GatherPro.events](https://gatherpro.events): A Event Photos management tools, Streamline Your Event Photos.
+-   [Website CMS Management](https://filamentphp.com/plugins/solution-forest-cms-website): Website CMS Management - Filament CMS Plugin
+-   [Filaletter](https://filaletter.solutionforest.net): Filaletter - Filament Newsletter Plugin
 
 # Filament Field Group
 
@@ -17,9 +16,7 @@ We have built a collection of best-in-class products:
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/solutionforest/filament-field-group/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/solutionforest/filament-field-group/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/solution-forest/filament-field-group.svg?style=flat-square)](https://packagist.org/packages/solution-forest/filament-field-group)
 
-
 Filament Field Group is a powerful Laravel package that enhances Filament's form building capabilities. It allows you to easily group and organize form fields, improving the structure and readability of your forms. With this package, you can create collapsible sections, tabs, or custom layouts for your form fields, making complex forms more manageable and user-friendly.
-
 
 ## Installation
 
@@ -28,24 +25,27 @@ Filament Field Group is a powerful Laravel package that enhances Filament's form
     composer require solution-forest/filament-field-group
     ```
 2. Register the plugin in your Panel provider
-   ```php
-    use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
 
-    class AdminPanelProvider extends PanelProvider
-    {
-        public function panel(Panel $panel): Panel
-        {
-            return $panel
-                ->plugin(FilamentFieldGroupPlugin::make());
-        }
-    }
-   ```
+    ```php
+     use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
+
+     class AdminPanelProvider extends PanelProvider
+     {
+         public function panel(Panel $panel): Panel
+         {
+             return $panel
+                 ->plugin(FilamentFieldGroupPlugin::make());
+         }
+     }
+    ```
+
 3. Then execute the following commands:
     ```bash
     php artisan filament-field-group:install
     ```
 
 ## Publish Config, View, Translation and Migration
+
 You can publish and run the migrations with:
 
 ```bash
@@ -85,6 +85,7 @@ return [
 
 1. Add `FilamentFieldGroupPlugin` to you panel.
 2. Enable the Field Group resource by setting `enabled` to `true` in the config file:
+
 ```php
 
 // config/filament-field-group.php
@@ -93,25 +94,29 @@ return [
     // ... other config options
 ];
 ```
+
 Or enable the plugin on `FilamentFieldGroupPlugin`
+
 ```php
 use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
- 
+
 $panel
     ->plugin(FilamentFieldGroupPlugin::make()->enablePlugin());
 ```
-![Filament Field Group](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/initial-resource.png)
+
+![Filament Field Group](https://github.com/solutionforest/filament-field-group/raw/2.x/docs-assets/images/initial-resource.png)
 
 3. Create field groups and fields, for example:
 
-   - Navigate to the Field Group resource in your Filament admin panel.
-   - Create a new field group (e.g., "User Basic Info").
-   - Add fields to the group (e.g., name, email, etc.).
-![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/add-field-1.png)
-![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/add-field-2.png)
-![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/add-field-3.png)
+    - Navigate to the Field Group resource in your Filament admin panel.
+    - Create a new field group (e.g., "User Basic Info").
+    - Add fields to the group (e.g., name, email, etc.).
+      ![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/2.x/docs-assets/images/add-field-1.png)
+      ![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/2.x/docs-assets/images/add-field-2.png)
+      ![Create Field Group and Field](https://github.com/solutionforest/filament-field-group/raw/2.x/docs-assets/images/add-field-3.png)
 
 4. Apply field groups to your form schema:
+
 ```php
 
 use SolutionForest\FilamentFieldGroup\Facades\FilamentFieldGroup;
@@ -126,35 +131,38 @@ public static function form(Form $form): Form
         ]);
 }
 ```
-![Apply Field Group](https://github.com/solutionforest/filament-field-group/raw/main/docs-assets/images/apply-field-group.png)
-   
+
+![Apply Field Group](https://github.com/solutionforest/filament-field-group/raw/2.x/docs-assets/images/apply-field-group.png)
+
 ## Available Components
 
 Currently, this package provides the following components:
 
-- Text
-- TextArea
-- Email
-- Password
-- Number
-- Url
-- Select
-- Toggle
-- Radio
-- File
-- Image
-- Color Picker
-- DateTime Picker
+-   Text
+-   TextArea
+-   Email
+-   Password
+-   Number
+-   Url
+-   Select
+-   Toggle
+-   Radio
+-   File
+-   Image
+-   Color Picker
+-   DateTime Picker
 
 More components can be added in the future. Feel free to submit a pull request if you have ideas for additional components!
 
-
 ## Advanced Usage
+
 ### Custom Resources
+
 You can call `resources` on `FilamentFieldGroupPlugin` to add/replace original resource:
+
 ```php
 use SolutionForest\FilamentFieldGroup\FilamentFieldGroupPlugin;
- 
+
 $panel
     ->plugin(FilamentFieldGroupPlugin::make()
         ->resources([
@@ -225,7 +233,6 @@ public function boot(): void
 
 This allows you to modify the configuration form for field types while preserving all the default options.
 
-
 ### Custom Models
 
 You can set custom models for field groups and fields in your `AppServiceProvider`:
@@ -256,7 +263,7 @@ class MyFieldTypeMixin
             return array_merge($rules, ['required', 'string']);
         };
     }
-    
+
     public function addHelperText()
     {
         return function () {
@@ -302,8 +309,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [alan](https://github.com/solutionforest)
-- [All Contributors](../../contributors)
+-   [alan](https://github.com/solutionforest)
+-   [All Contributors](../../contributors)
 
 ## License
 
