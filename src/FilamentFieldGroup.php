@@ -144,7 +144,7 @@ class FilamentFieldGroup
 
                 return [$item['name'] => view('filament-field-group::field-type-option', [
                     'icon' => $icon,
-                    'label' => $label
+                    'label' => $label,
                 ])->render()];
             }))
             ->toArray();
