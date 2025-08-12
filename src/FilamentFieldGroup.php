@@ -141,28 +141,10 @@ class FilamentFieldGroup
                 $icon = $item['icon'] ?? null;
                 $label = $item['display'] ?? $item['name'] ?? '';
 
-                $textWithIconHtml = filled($icon) ?
-                Blade::render(<<<'blade'
-                        <div class="flex items-center gap-2">
-                            <x-filament::icon
-                                icon="{{$icon}}"
-                                class="h-5 w-5"
-                            />
-                            <span>
-                                {{ $value }}
-                            </span>
-                        </div>
-                    blade, ['icon' => $icon, 'value' => $label]) :
-                    Blade::render(<<<'blade'
-                        <div class="flex items-center gap-2">
-                            <div class="h-5 w-5"></div>
-                            <span>
-                                {{ $value }}
-                            </span>
-                        </div>
-                    blade, ['value' => $label]);
-
-                return [$item['name'] => $textWithIconHtml];
+                return [$item['name'] => view('filament-field-group::field-type-option', [
+                    'icon' => $icon,
+                    'label' => $label
+                ])->render()];
             }))
             ->toArray();
     }
