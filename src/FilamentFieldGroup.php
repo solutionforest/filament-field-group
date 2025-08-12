@@ -5,7 +5,6 @@ namespace SolutionForest\FilamentFieldGroup;
 use Filament\Schemas\Components\Component;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Blade;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\Concerns\HasFieldTypes;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
@@ -143,28 +142,10 @@ class FilamentFieldGroup
                 $icon = $item['icon'] ?? null;
                 $label = $item['display'] ?? $item['name'] ?? '';
 
-                $textWithIconHtml = filled($icon) ?
-                Blade::render(<<<'blade'
-                        <div style="display:flex;gap:0.5rem;align-items:center;">
-                            <x-filament::icon
-                                icon="{{$icon}}"
-                                class="h-5 w-5"
-                            />
-                            <span>
-                                {{ $value }}
-                            </span>
-                        </div>
-                    blade, ['icon' => $icon, 'value' => $label]) :
-                    Blade::render(<<<'blade'
-                        <div style="display:flex;gap:0.5rem;align-items:center;">
-                            <div class="h-5 w-5"></div>
-                            <span>
-                                {{ $value }}
-                            </span>
-                        </div>
-                    blade, ['value' => $label]);
-
-                return [$item['name'] => $textWithIconHtml];
+                return [$item['name'] => view('filament-field-group::field-type-option', [
+                    'icon' => $icon,
+                    'label' => $label
+                ])->render()];
             }))
             ->toArray();
     }
