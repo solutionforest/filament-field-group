@@ -18,6 +18,13 @@ We have built a collection of best-in-class products:
 
 Filament Field Group is a powerful Laravel package that enhances Filament's form building capabilities. It allows you to easily group and organize form fields, improving the structure and readability of your forms. With this package, you can create collapsible sections, tabs, or custom layouts for your form fields, making complex forms more manageable and user-friendly.
 
+## Supported Filament versions
+
+| Filament Version | Plugin Version |
+| ---------------- | -------------- |
+| v3               | 1.x.x          |
+| v4               | 2.x.x          |
+
 ## Installation
 
 1. You can install the package via composer:
