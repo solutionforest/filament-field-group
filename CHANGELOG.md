@@ -2,6 +2,16 @@
 
 All notable changes to `filament-field-group` will be documented in this file.
 
+## 1.0.15 - 2025-08-12
+
+### What's Changed
+
+* Support icon alias for field option
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/solutionforest/filament-field-group/pull/5
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/solutionforest/filament-field-group/pull/7
+
+**Full Changelog**: https://github.com/solutionforest/filament-field-group/compare/1.0.14...1.0.15
+
 ## 1.0.14 - 2025-05-06
 
 ### What's Changed
