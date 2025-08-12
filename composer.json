@@ -1,6 +1,6 @@
 {
     "name": "solution-forest/filament-field-group",
-    "description": "test",
+    "description": "Filament Field Group is a powerful Laravel package that enhances Filament's form building capabilities. It allows you to easily group and organize form fields, improving the structure and readability of your forms.",
     "keywords": [
         "solutionforest",
         "laravel",
