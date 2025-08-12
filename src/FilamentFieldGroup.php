@@ -5,7 +5,6 @@ namespace SolutionForest\FilamentFieldGroup;
 use Filament\Forms;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Blade;
 use ReflectionClass;
 use SolutionForest\FilamentFieldGroup\Concerns\HasFieldTypes;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
@@ -143,7 +142,7 @@ class FilamentFieldGroup
 
                 return [$item['name'] => view('filament-field-group::field-type-option', [
                     'icon' => $icon,
-                    'label' => $label
+                    'label' => $label,
                 ])->render()];
             }))
             ->toArray();
