@@ -2,6 +2,10 @@
 
 All notable changes to `filament-field-group` will be documented in this file.
 
+## 2.0.0 - 2025-08-13
+
+### Support Filament v4
+
 ## 1.0.15 - 2025-08-12
 
 ### What's Changed
