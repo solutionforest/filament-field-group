@@ -1,6 +1,6 @@
 @props(['label' => '', 'icon' => null])
 
-<div class="flex items-center gap-2">
+<div style="display: flex; align-items: center; gap: 0.5rem;">
     @if (filled($icon))
         <x-filament::icon
             :icon="$icon"
