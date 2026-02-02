@@ -24,6 +24,7 @@ Filament Field Group is a powerful Laravel package that enhances Filament's form
 | ---------------- | -------------- |
 | v3               | 1.x.x          |
 | v4               | 2.x.x          |
+| v5               | 3.x.x          |
 
 ## Installation
 
