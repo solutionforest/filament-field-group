@@ -318,7 +318,7 @@ class FilamentFieldGroup
      */
     protected function guessModelContractClass(string $modelClass): string
     {
-        $class = new \ReflectionClass($modelClass);
+        $class = new ReflectionClass($modelClass);
 
         $shortName = $class->getShortName();
         $namespace = $class->getNamespaceName();

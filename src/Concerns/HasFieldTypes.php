@@ -3,25 +3,38 @@
 namespace SolutionForest\FilamentFieldGroup\Concerns;
 
 use Closure;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\ColorPicker;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\DateTimePicker;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Email;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\FieldTypeBaseConfig;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\File;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Image;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Number;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Password;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Radio;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Select;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\TextArea;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Toggle;
+use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Url;
 
 trait HasFieldTypes
 {
     protected array $fieldTypeConfigs = [
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Text::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\TextArea::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Email::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Password::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Number::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Url::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Select::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Toggle::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Radio::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\File::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Image::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\ColorPicker::class,
-        \SolutionForest\FilamentFieldGroup\FieldTypes\Configs\DateTimePicker::class,
+        Text::class,
+        TextArea::class,
+        Email::class,
+        Password::class,
+        Number::class,
+        Url::class,
+        Select::class,
+        Toggle::class,
+        Radio::class,
+        File::class,
+        Image::class,
+        ColorPicker::class,
+        DateTimePicker::class,
     ];
 
     /**
