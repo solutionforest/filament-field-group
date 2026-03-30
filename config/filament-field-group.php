@@ -1,11 +1,14 @@
 <?php
 
+use SolutionForest\FilamentFieldGroup\Models\Field;
+use SolutionForest\FilamentFieldGroup\Models\FieldGroup;
+
 // config for SolutionForest/FilamentFieldGroup
 return [
     'enabled' => false,
     'models' => [
-        'field' => \SolutionForest\FilamentFieldGroup\Models\Field::class,
-        'field_group' => SolutionForest\FilamentFieldGroup\Models\FieldGroup::class,
+        'field' => Field::class,
+        'field_group' => FieldGroup::class,
     ],
     'table_names' => [
         'fields' => 'advanced_fields',

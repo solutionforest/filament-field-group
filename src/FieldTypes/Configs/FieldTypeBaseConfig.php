@@ -12,7 +12,7 @@ use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\DbType;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Attributes\FormComponent;
 use SolutionForest\FilamentFieldGroup\FieldTypes\Configs\Contracts\FieldTypeConfig;
 
-abstract class FieldTypeBaseConfig implements Contracts\FieldTypeConfig
+abstract class FieldTypeBaseConfig implements FieldTypeConfig
 {
     use Macroable;
 
