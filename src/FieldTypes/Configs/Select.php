@@ -61,12 +61,24 @@ class Select extends FieldTypeBaseConfig implements FieldTypeConfig
                                     }
                                     $component->state($state);
                                 })
-                                ->dehydrateStateUsing(function ($state) {
-                                    if ($state === null) {
-                                        return [];
+                                ->dehydrateStateUsing(function ($state, callable $get) {
+                                    if ($state === null || $state === '') {
+                                        return null;
                                     }
 
-                                    return explode('|', $state);
+                                    $values = array_values(
+                                        array_filter(explode('|', $state), fn ($v) => $v !== '')
+                                    );
+
+                                    // When multiple=false store a scalar, not an array.
+                                    // Storing an array for a single-select causes
+                                    // "Array to string conversion" in OptionStateCast::set()
+                                    // when Filament v4 hydrates the content form.
+                                    if ((bool) $get('multiple')) {
+                                        return $values;
+                                    }
+
+                                    return $values[0] ?? null;
                                 }),
                         ]),
                 ]),
@@ -91,7 +103,18 @@ class Select extends FieldTypeBaseConfig implements FieldTypeConfig
         }
 
         if ($this->defaultValue !== null) {
-            $component->default($this->defaultValue);
+            $default = $this->defaultValue;
+
+            // Normalise legacy data: before v4 a single-select's defaultValue
+            // was stored as an array (e.g. ["_blank"]).  OptionStateCast::set()
+            // in Filament v4 calls strval() on the value, which crashes on arrays.
+            if (! $this->multiple && is_array($default)) {
+                $default = count($default) > 0 ? array_values($default)[0] : null;
+            }
+
+            if ($default !== null) {
+                $component->default($default);
+            }
         }
     }
 }
